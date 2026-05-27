@@ -20,8 +20,6 @@ app.use(express.json());
 // es para que render pueda abrir index.html
 app.use(express.static("Public"));
 
-const path = require("path");
-
 app.get("/", (req, res) => {
     res.sendFile(
         path.join(
