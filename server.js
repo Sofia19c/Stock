@@ -20,9 +20,6 @@ app.use(express.json());
 // es para que render pueda abrir index.html
 app.use(express.static("Public"));
 
-//Indica que la carpeta public contendrá archivos estáticos.
-app.use(express.static("public"));
-
 //MOSTRAR PRODUCTOS EN LA TABLA
 //Aqui esta escuchando la peticion POST en la direccion /producto
 //esta peticion fue enviada en la linea 23 del archivo script.js
