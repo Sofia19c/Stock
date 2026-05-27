@@ -16,6 +16,10 @@ const PORT = process.env.PORT || 3000;
 //Activa un middleware para que Express pueda entender datos en formato JSON.
 //Muy útil cuando el frontend envía información mediante POST, PUT, etc.
 app.use(express.json());
+//Le dice a Express: sirve los archivos HTML, CSS y JS que están en Public/
+// es para que render pueda abrir index.html
+app.use(express.static("Public"));
+
 //Indica que la carpeta public contendrá archivos estáticos.
 app.use(express.static("public"));
 
