@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- idioma  -->
+<HEAD>
+    <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
+    <h1>INVENTARIO</h1>
+    <link rel ="stylesheet" href="style.css">
+</HEAD>
+<body>
+    <h1>📦 Stock Fácil</h1>
+    <p class="subtitulo">
+        controla tu inventario facilmente
+    </p>
+
+    <!-- Esta seccion de codigo muestra 3 tarjetas con estadisticas de los productos-->
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total productos</h3>
+            <!--El 0 se utiliza para mostrar todos los elementos de una lista -->
+            <p id="total-productos">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Poco stock</h3>
+            <p id="stock-bajo-total">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Valor inventario</h3>
+            <p id="valor-total">0</p>
+        </div>
+
+    </div>
+
+    <div class="formulario"> <!-- Contenedor para los campos del formulario. -->
+        <input type="text" id="nombre" placeholder="Nombre producto">
+        <input type="number" id ="cantidad" placeholder="cantidad">
+        <input type="number" id="precio" placeholder="precio">
+        <button id="btn-agregar">
+            Agregar
+        </button> 
+        <!--el id del boton permite capturar el click con java script -->
+    </div>
+
+    <!-- Agregar buscador -->
+    <input 
+        type="text"
+        id="busqueda"
+        placeholder="Buscar producto..."
+    >
+
+    <table>
+        <thead> <!--titulo de las columnas de las tablas -->
+            <tr> <!--filas -->
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tabla-productos"> </tbody> <!--Aquí se agregarán dinámicamente los productos usando JavaScript. -->
+    </table>
+    <script src="script.js"></script> <!--conecta el archivo html con el archivo de java script -->
+</body>
+</html>
