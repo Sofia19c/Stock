@@ -20,6 +20,17 @@ app.use(express.json());
 // es para que render pueda abrir index.html
 app.use(express.static("Public"));
 
+const path = require("path");
+
+app.get("/", (req, res) => {
+    res.sendFile(
+        path.join(
+            __dirname,
+            "Public",
+            "Index.html"
+        )
+    );
+});
 //MOSTRAR PRODUCTOS EN LA TABLA
 //Aqui esta escuchando la peticion POST en la direccion /producto
 //esta peticion fue enviada en la linea 23 del archivo script.js
