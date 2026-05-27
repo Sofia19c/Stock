@@ -1,19 +1,7 @@
 [
   {
-    "nombre": "coca cola",
-    "cantidad": 8,
-    "precio": "5000",
-    "id": 1779492585665
-  },
-  {
-    "nombre": "pepsi",
-    "cantidad": 3,
-    "precio": "2000",
-    "id": 1779492925863
-  },
-  {
     "nombre": "cocacola",
-    "cantidad": 8,
+    "cantidad": 4,
     "precio": "1000",
     "id": 1779492942956
   },
