@@ -1,130 +1,213 @@
 body {
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0px;
+    background: linear-gradient(
+        135deg,
+        #eef2ff,
+        #f8fafc
+    );
+    margin: 0;
     padding: 40px;
+    min-height: 100vh;
 }
 
-h1{
-    text-align:center;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.subtitulo{
+/* TITULOS */
+h1 {
     text-align: center;
-    color: gray;
-    margin-bottom: 30px;
+    color: #1e293b;
+    margin-bottom: 8px;
+    font-size: 42px;
 }
 
-.formulario{
-    display:flex;
-    gap: 10px;
+.subtitulo {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 35px;
+    font-size: 18px;
+}
+
+/* DASHBOARD */
+.dashboard {
+    display: flex;
     justify-content: center;
+    gap: 24px;
+    margin-bottom: 45px;
+    flex-wrap: wrap;
+}
+
+.card {
+    background: rgba(
+        255,
+        255,
+        255,
+        0.75
+    );
+
+    backdrop-filter: blur(12px);
+
+    width: 230px;
+
+    padding: 25px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.08);
+
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform:
+        translateY(-6px);
+}
+
+.card h3 {
+    color: #64748b;
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+
+.card p {
+    font-size: 34px;
+    font-weight: bold;
+    color: #4f46e5;
+    margin: 0;
+}
+
+/* FORMULARIO */
+.formulario {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
     margin-bottom: 20px;
 }
 
-input{
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    width: 180px;
-}
-
-#busqueda{
-    display: block;
-    margin: auto;
-    margin-bottom: 25px;
-    width: 350;
-}
-
-button{
-    padding: 10px 14px;
-    border: none;
-    border-radius: 8px;
-    background:  #4f46e5;
-    color: white;
-    cursor: pointer; /*Cambia el cursor a una mano cuando pasas sobre el botón. */
+input {
+    padding: 14px 16px;
+    border: 1px solid #dbe2ea;
+    border-radius: 14px;
+    width: 220px;
+    font-size: 15px;
+    background: white;
     transition: 0.2s;
 }
 
-/*cambia la apariencia del cursor */
-button:hover{
-    transform: scale(1.05);
+input:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow:
+        0 0 0 4px
+        rgba(79,70,229,0.15);
 }
 
-table{
-    width: 100%;
-    border-collapse: collapse; /*evita bordes dobles*/
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+/* BUSCADOR */
+#busqueda {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+    width: 420px;
+    max-width: 90%;
 }
 
-th{
-    /* th: encabezados
-    td: celdas normales */
-    background:  #4f46e5;
+/* BOTONES */
+button {
+    padding: 14px 20px;
+    border: none;
+    border-radius: 14px;
+    background: #4f46e5;
     color: white;
-    padding: 14px;
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-td{
-    /* th: encabezados
-    td: celdas normales */
-    padding: 14px;
+button:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(79,70,229,0.35);
+}
+
+/* BOTON EXCEL */
+#btn-excel {
+    display: block;
+    margin: 10px auto 35px auto;
+}
+
+/* TABLA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.08);
+}
+
+th {
+    background: #4f46e5;
+    color: white;
+    padding: 18px;
+    font-size: 15px;
+}
+
+td {
+    padding: 18px;
     text-align: center;
-    border-bottom: 1px solid #eee;
+    border-bottom:
+        1px solid #f1f5f9;
 }
 
-/*Ayuda a que el usuario no se pierda entre tantas lineas, poniendo color*/
-tr:hover{
-     background: #f8f9ff;
+tr:hover {
+    background:
+        #f8faff;
 }
 
+/* ESTADOS */
 .stock-bajo {
-    color: red;
+    color: #dc2626;
     font-weight: bold;
 }
 
 .stock-ok {
-    color: green;
+    color: #16a34a;
     font-weight: bold;
 }
 
-/* gap: sirve para hacer la separación entre filas y columnas*/
-/* flex-wrap: organiza el espacio, de forma que si algo no cabe 
-en una sola linea , lo pone abajo */
-.dashboard{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    margin-bottom: 60px;
-    flex-wrap: wrap;
-}
+/* RESPONSIVE */
+@media (
+    max-width: 768px
+) {
 
-.card{
-    background: white;
-    width: 220px;
-    padding: 20px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
-}
+    body {
+        padding: 20px;
+    }
 
-.card h3{
-    color: #666;
-    margin-bottom: 10px;
-}
+    h1 {
+        font-size: 32px;
+    }
 
-.card{
-    font-size: 28px;
-    font-weight: bold;
-    color: #4f46e5;
-}
+    .formulario {
+        flex-direction: column;
+        align-items: center;
+    }
 
-#btn-excel{
-    margin-top: 20px;
-    margin-bottom: 30px;
+    input {
+        width: 90%;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+    }
 }

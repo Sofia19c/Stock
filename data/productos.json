@@ -1,7 +1,7 @@
 [
   {
     "nombre": "cocacola",
-    "cantidad": 4,
+    "cantidad": 5,
     "precio": "1000",
     "id": 1779492942956
   },
@@ -31,7 +31,7 @@
   },
   {
     "nombre": "coca cola",
-    "cantidad": 5,
+    "cantidad": 6,
     "precio": "1",
     "id": 1779720174392
   },
