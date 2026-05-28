@@ -123,3 +123,8 @@ en una sola linea , lo pone abajo */
     font-weight: bold;
     color: #4f46e5;
 }
+
+#btn-excel{
+    margin-top: 20px;
+    margin-bottom: 30px;
+}

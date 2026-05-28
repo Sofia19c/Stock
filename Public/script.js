@@ -210,3 +210,17 @@ document
 .addEventListener("input", () =>{
     cargarProductos();
 });
+
+const botonExcel =
+    document.getElementById(
+        "btn-excel"
+    );
+
+botonExcel.addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "/exportar-excel";
+    }
+);

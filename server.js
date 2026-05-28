@@ -1,6 +1,8 @@
 //Importa la librería Express, que sirve para crear servidores web y APIs
 const { error } = require("console");
 const express = require("express");
+//Importa la liberira para exportar documentos de excel
+const ExcelJS = require("exceljs");
 // Importa el modulo fs(File System)
 // Se usa para leer, escribir o manipular archivos en el sistema
 const fs = require("fs");
@@ -229,7 +231,82 @@ app.delete("/productos/:id", (req, res) =>{
     });
 });
 
+app.get("/exportar-excel", async (req, res) => {
+
+    const rutaArchivo = path.join(
+        __dirname,
+        "data",
+        "productos.json"
+    );
+
+    fs.readFile(
+        rutaArchivo,
+        "utf8",
+        async (error, data) => {
+
+            if (error) {
+                return res.status(500).json({
+                    mensaje: "Error leyendo productos"
+                });
+            }
+
+            const productos =
+                JSON.parse(data);
+
+            const workbook =
+                new ExcelJS.Workbook();
+
+            const worksheet =
+                workbook.addWorksheet(
+                    "Inventario"
+                );
+
+            worksheet.columns = [
+                {
+                    header: "Producto",
+                    key: "nombre",
+                    width: 25
+                },
+                {
+                    header: "Cantidad",
+                    key: "cantidad",
+                    width: 15
+                },
+                {
+                    header: "Precio",
+                    key: "precio",
+                    width: 15
+                }
+            ];
+
+            productos.forEach(
+                producto => {
+                    worksheet.addRow(
+                        producto
+                    );
+                }
+            );
+
+            res.setHeader(
+                "Content-Type",
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            );
+
+            res.setHeader(
+                "Content-Disposition",
+                "attachment; filename=inventario.xlsx"
+            );
+
+            await workbook.xlsx.write(
+                res
+            );
+
+            res.end();
+        }
+    );
+});
 
 app.listen(PORT, () => { //escucha en el puerto
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
