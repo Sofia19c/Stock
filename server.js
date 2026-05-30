@@ -2,7 +2,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 
 const Producto =
-require("./models/Producto");
+require("./models/producto");
 //Importa la librería Express, que sirve para crear servidores web y APIs
 const { error } = require("console");
 const express = require("express");
