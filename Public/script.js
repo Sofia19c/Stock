@@ -150,15 +150,15 @@ async function cargarProductos() {
                 </td>
 
                 <td>
-                    <button onclick="editarCantidad(${producto.id}, 1)">
+                    <button onclick="editarCantidad('${producto._id}', 1)">
                         +
                     </button>
 
-                    <button onclick="editarCantidad(${producto.id}, -1)">
+                    <button onclick="editarCantidad('${producto._id}', -1)">
                         -
                     </button>
 
-                    <button onclick="eliminarProducto(${producto.id})">
+                    <button onclick="eliminarProducto('${producto._id}')">
                         🗑️
                     </button>
                 </td>

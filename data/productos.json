@@ -1,11 +1,5 @@
 [
   {
-    "nombre": "cocacola",
-    "cantidad": 5,
-    "precio": "1000",
-    "id": 1779492942956
-  },
-  {
     "nombre": "Agua",
     "cantidad": 3,
     "precio": "500",
