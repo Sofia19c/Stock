@@ -74,6 +74,8 @@ app.post("/productos", async (req, res) =>{
             "Producto guardado correctamente "
         });
     } catch (error){
+        console.log(error);
+
         res.status(500).json({
             mensaje:
             "Error guardando producto"
@@ -91,6 +93,11 @@ app.get("/productos", async (req, res) => {
         res.json(productos);
 
     }catch (error) {
+
+         console.log(
+            "ERROR PRODUCTOS:",
+            error
+        );
 
         res.status(500).json({
             mensaje:
