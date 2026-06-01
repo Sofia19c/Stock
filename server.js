@@ -15,7 +15,7 @@ const fs = require("fs");
 //Ayuda a trabajar con rutas de archivos y carpetas.
 const path = require ("path");
 const { json } = require("stream/consumers");
-const producto = require("./models/Producto");
+const producto = require("./models/producto");
 //Crea una aplicación de Express.
 //app será el objeto principal para configurar rutas, middleware y el servidor.
 const app = express();
