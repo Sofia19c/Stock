@@ -2,70 +2,129 @@
 <html lang="es"> <!-- idioma  -->
 <HEAD>
     <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
-    <h1>INVENTARIO</h1>
+    <title>INVENTARIO</title>
     <link rel ="stylesheet" href="style.css">
 </HEAD>
 <body>
-    <h1>📦 inventario</h1>
-    <p class="subtitulo">
-        controla tu inventario facilmente
-    </p>
-
     <!-- Esta seccion de codigo muestra 3 tarjetas con estadisticas de los productos-->
-    <div class="dashboard">
+    <div class="layout">
 
-        <div class="card">
-            <h3>Total productos</h3>
-            <!--El 0 se utiliza para mostrar todos los elementos de una lista -->
-            <p id="total-productos">0</p>
+    <aside class="sidebar">
+
+        <div class="logo">
+            📦 Inventario
         </div>
 
-        <div class="card">
-            <h3>Poco stock</h3>
-            <p id="stock-bajo-total">0</p>
-        </div>
+        <nav>
+            <ul>
+                <li class="activo">🏠 Dashboard</li>
+                <li>📦 Productos</li>
+                <li>📂 Categorías</li>
+                <li>📥 Entradas</li>
+                <li>📤 Salidas</li>
+                <li>📊 Reportes</li>
+                <li>⚙ Configuración</li>
+            </ul>
+        </nav>
 
-        <div class="card">
-            <h3>Valor inventario</h3>
-            <p id="valor-total">0</p>
-        </div>
+    </aside>
 
-    </div>
+    <main class="contenido">
 
-    <div class="formulario"> <!-- Contenedor para los campos del formulario. -->
-        <input type="text" id="nombre" placeholder="Nombre producto">
-        <input type="number" id ="cantidad" placeholder="cantidad">
-        <input type="number" id="precio" placeholder="precio">
-        <button id="btn-agregar">
-            Agregar
-        </button> 
-        <!--el id del boton permite capturar el click con java script -->
-    </div>
+        <header class="navbar">
 
-    <!-- Agregar buscador -->
-    <input 
-        type="text"
-        id="busqueda"
-        placeholder="Buscar producto..."
-    >
+            <h2>Dashboard</h2>
 
-    <!--Boton  -->
-    <button id="btn-excel">
-    📥 Descargar Excel
-    </button>
+            <input
+                type="text"
+                id="busqueda"
+                placeholder="Buscar producto..."
+            >
 
-    <table>
-        <thead> <!--titulo de las columnas de las tablas -->
-            <tr> <!--filas -->
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Estado</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tabla-productos"> </tbody> <!--Aquí se agregarán dinámicamente los productos usando JavaScript. -->
-    </table>
-    <script src="script.js"></script> <!--conecta el archivo html con el archivo de java script -->
+        </header>
+
+        <section class="dashboard">
+
+            <div class="card">
+                <h3>Total Productos</h3>
+                <p id="total-productos">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Poco Stock</h3>
+                <p id="stock-bajo-total">0</p>
+            </div>
+
+            <div class="card">
+                <h3>Valor Inventario</h3>
+                <p id="valor-total">$0</p>
+            </div>
+
+        </section>
+
+        <section class="paneles">
+
+            <div class="panel">
+
+                <h3>Nuevo Producto</h3>
+
+                <div class="formulario">
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        placeholder="Nombre producto"
+                    >
+
+                    <input
+                        type="number"
+                        id="cantidad"
+                        placeholder="Cantidad"
+                    >
+
+                    <input
+                        type="number"
+                        id="precio"
+                        placeholder="Precio"
+                    >
+
+                    <button id="btn-agregar">
+                        Agregar Producto
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <button id="btn-excel">
+            📥 Exportar Excel
+        </button>
+
+        <section class="tabla-container">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tabla-productos"></tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+</div>
+<script src="script.js"></script>
 </body>
 </html>

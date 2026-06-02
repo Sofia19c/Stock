@@ -1,213 +1,362 @@
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(
-        135deg,
-        #eef2ff,
-        #f8fafc
-    );
-    margin: 0;
-    padding: 40px;
-    min-height: 100vh;
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* TITULOS */
-h1 {
-    text-align: center;
-    color: #1e293b;
-    margin-bottom: 8px;
-    font-size: 42px;
+body{
+    font-family:'Segoe UI',sans-serif;
+    background:#f1f5f9;
+    color:#1e293b;
 }
 
-.subtitulo {
-    text-align: center;
-    color: #64748b;
-    margin-bottom: 35px;
-    font-size: 18px;
+/* =========================
+   LAYOUT
+========================= */
+
+.layout{
+    display:flex;
+    min-height:100vh;
 }
 
-/* DASHBOARD */
-.dashboard {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 45px;
-    flex-wrap: wrap;
-}
+/* =========================
+   SIDEBAR
+========================= */
 
-.card {
-    background: rgba(
-        255,
-        255,
-        255,
-        0.75
+.sidebar{
+    width:270px;
+    background:linear-gradient(
+        180deg,
+        #0f172a,
+        #1e293b
     );
 
-    backdrop-filter: blur(12px);
+    color:white;
 
-    width: 230px;
+    position:fixed;
 
-    padding: 25px;
+    top:0;
+    left:0;
+    bottom:0;
 
-    border-radius: 24px;
+    padding:30px 20px;
+}
 
-    text-align: center;
+.logo{
+    font-size:24px;
+    font-weight:700;
+    margin-bottom:40px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar li{
+    padding:14px 18px;
+    margin-bottom:10px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.sidebar li:hover{
+    background:rgba(
+        255,
+        255,
+        255,
+        .1
+    );
+}
+
+.activo{
+    background:#4f46e5;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.contenido{
+    margin-left:270px;
+    width:100%;
+    padding:30px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+    background:white;
+
+    border-radius:20px;
+
+    padding:20px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+
+    box-shadow:
+        0 8px 24px
+        rgba(0,0,0,.05);
+}
+
+.navbar h2{
+    font-size:28px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+input{
+    border:none;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    font-size:15px;
+
+    transition:.3s;
+}
+
+input:focus{
+    outline:none;
+
+    border-color:#4f46e5;
+
+    box-shadow:
+        0 0 0 4px
+        rgba(79,70,229,.15);
+}
+
+#busqueda{
+    width:320px;
+}
+
+/* =========================
+   DASHBOARD
+========================= */
+
+.dashboard{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(240px,1fr)
+        );
+
+    gap:25px;
+
+    margin-bottom:30px;
+}
+
+.card{
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:30px;
+
+    text-align:center;
 
     box-shadow:
         0 10px 30px
-        rgba(0,0,0,0.08);
+        rgba(0,0,0,.06);
 
-    transition: 0.3s;
+    transition:.3s;
 }
 
-.card:hover {
+.card:hover{
     transform:
         translateY(-6px);
 }
 
-.card h3 {
-    color: #64748b;
-    margin-bottom: 12px;
-    font-size: 17px;
+.card h3{
+    color:#64748b;
+    margin-bottom:15px;
 }
 
-.card p {
-    font-size: 34px;
-    font-weight: bold;
-    color: #4f46e5;
-    margin: 0;
+.card p{
+    font-size:42px;
+    font-weight:700;
+    color:#4f46e5;
 }
 
-/* FORMULARIO */
-.formulario {
-    display: flex;
-    justify-content: center;
-    gap: 14px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
+/* =========================
+   PANEL
+========================= */
 
-input {
-    padding: 14px 16px;
-    border: 1px solid #dbe2ea;
-    border-radius: 14px;
-    width: 220px;
-    font-size: 15px;
-    background: white;
-    transition: 0.2s;
-}
+.panel{
+    background:white;
 
-input:focus {
-    outline: none;
-    border-color: #4f46e5;
+    border-radius:24px;
+
+    padding:30px;
+
+    margin-bottom:25px;
+
     box-shadow:
-        0 0 0 4px
-        rgba(79,70,229,0.15);
+        0 10px 30px
+        rgba(0,0,0,.06);
 }
 
-/* BUSCADOR */
-#busqueda {
-    display: block;
-    margin: auto;
-    margin-bottom: 20px;
-    width: 420px;
-    max-width: 90%;
+.panel h3{
+    margin-bottom:20px;
 }
 
-/* BOTONES */
-button {
-    padding: 14px 20px;
-    border: none;
-    border-radius: 14px;
-    background: #4f46e5;
-    color: white;
-    cursor: pointer;
-    transition: 0.25s;
-    font-size: 15px;
-    font-weight: bold;
+/* =========================
+   FORMULARIO
+========================= */
+
+.formulario{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px,1fr)
+        );
+
+    gap:15px;
 }
 
-button:hover {
+/* =========================
+   BOTONES
+========================= */
+
+button{
+
+    border:none;
+
+    background:#4f46e5;
+
+    color:white;
+
+    padding:14px 18px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+button:hover{
+
     transform:
         translateY(-2px);
 
     box-shadow:
         0 8px 20px
-        rgba(79,70,229,0.35);
+        rgba(79,70,229,.35);
 }
 
-/* BOTON EXCEL */
-#btn-excel {
-    display: block;
-    margin: 10px auto 35px auto;
+#btn-excel{
+    margin-bottom:25px;
 }
 
-/* TABLA */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 24px;
-    overflow: hidden;
+/* =========================
+   TABLA
+========================= */
+
+.tabla-container{
+
+    background:white;
+
+    border-radius:24px;
+
+    overflow:hidden;
 
     box-shadow:
         0 10px 30px
-        rgba(0,0,0,0.08);
+        rgba(0,0,0,.06);
 }
 
-th {
-    background: #4f46e5;
-    color: white;
-    padding: 18px;
-    font-size: 15px;
+table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-td {
-    padding: 18px;
-    text-align: center;
+th{
+
+    background:#4f46e5;
+
+    color:white;
+
+    padding:18px;
+}
+
+td{
+
+    padding:18px;
+
+    text-align:center;
+
     border-bottom:
         1px solid #f1f5f9;
 }
 
-tr:hover {
-    background:
-        #f8faff;
+tr:hover{
+    background:#f8fafc;
 }
 
-/* ESTADOS */
-.stock-bajo {
-    color: #dc2626;
-    font-weight: bold;
+/* =========================
+   ESTADOS
+========================= */
+
+.stock-ok{
+    color:#16a34a;
+    font-weight:700;
 }
 
-.stock-ok {
-    color: #16a34a;
-    font-weight: bold;
+.stock-bajo{
+    color:#dc2626;
+    font-weight:700;
 }
 
-/* RESPONSIVE */
-@media (
-    max-width: 768px
-) {
+/* =========================
+   RESPONSIVE
+========================= */
 
-    body {
-        padding: 20px;
+@media(max-width:900px){
+
+    .sidebar{
+        display:none;
     }
 
-    h1 {
-        font-size: 32px;
+    .contenido{
+        margin-left:0;
     }
 
-    .formulario {
-        flex-direction: column;
-        align-items: center;
+    .navbar{
+        flex-direction:column;
+        gap:15px;
     }
 
-    input {
-        width: 90%;
-    }
-
-    table {
-        display: block;
-        overflow-x: auto;
+    #busqueda{
+        width:100%;
     }
 }
