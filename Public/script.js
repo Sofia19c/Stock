@@ -97,6 +97,21 @@ async function cargarProductos() {
             0
         );
 
+    const totalCarplay = 
+        productos.filter(
+            p => p.categoria === "CarPlay"
+        ).length;
+
+    const totalCojines =
+        productos.filter(
+            p => p.categoria ==="Cojines"
+        ).length;
+
+    const totalIntercom =
+        productos.filter(
+            p => p.categoria === "Intercomunicadores"
+        ).length;
+
     //Aqui se actualiza el total de productos 
     document.getElementById(
         "total-productos"
@@ -112,6 +127,18 @@ async function cargarProductos() {
     document.getElementById(
         "valor-total"
     ).textContent =  `$${valorInventario.toLocaleString()}`;
+
+    document.getElementById(
+        "total-carplay"
+    ).textContent = totalCarplay;
+
+    document.getElementById(
+        "total-cojines"
+    ).textContent = totalCojines;
+
+    document.getElementById(
+        "total-intercom"
+    ).textContent = totalIntercom;
 
     // Esta línea limpia la tabla. Borra cualquier fila o texto que hubiera tenido antes. Esto se hace para que, si vuelves a cargar los productos,
     // no se dupliquen ni se acumulen con los viejos.
