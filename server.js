@@ -57,6 +57,9 @@ app.post("/productos", async (req, res) =>{
             nombre:
                 req.body.nombre, 
             
+            categoria:
+                req.body.categoria,
+            
             cantidad:
                 Number(
                     req.body.cantidad

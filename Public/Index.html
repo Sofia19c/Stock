@@ -3,18 +3,19 @@
 <HEAD>
     <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
     <title>INVENTARIO</title>
+    <!--Conecta este archivo HTML con el archivo css-->
     <link rel ="stylesheet" href="style.css">
 </HEAD>
 <body>
-    <!-- Esta seccion de codigo muestra 3 tarjetas con estadisticas de los productos-->
+    
     <div class="layout">
-
+    <!-- Esta seccion de codigo muestra el menu lateral-->
     <aside class="sidebar">
-
+    <!--un contenedor con el logo  -->
         <div class="logo">
             📦 Inventario
         </div>
-
+        <!--Esta es una lista que estara en el menu lateral-->
         <nav>
             <ul>
                 <li class="activo">🏠 Dashboard</li>
@@ -29,8 +30,10 @@
 
     </aside>
 
+    <!--Contenido principal-->
     <main class="contenido">
 
+        <!--Muestra el titulo de la seccion Dashboard y tiene un campo de texto -->
         <header class="navbar">
 
             <h2>Dashboard</h2>
@@ -43,6 +46,7 @@
 
         </header>
 
+        <!-- Aqui estan las tarjetas de estadisticas de los productos-->
         <section class="dashboard">
 
             <div class="card">
@@ -62,6 +66,7 @@
 
         </section>
 
+        <!--Fromulario de registro de los productos -->
         <section class="paneles">
 
             <div class="panel">
@@ -75,6 +80,25 @@
                         id="nombre"
                         placeholder="Nombre producto"
                     >
+                    <select id="categoria">
+
+                        <option value="CarPlay">
+                            🚗 CarPlay
+                        </option>
+
+                        <option value="Cojines">
+                            🪑 Cojines
+                        </option>
+
+                        <option value="Intercomunicadores">
+                            🎧 Intercomunicadores
+                        </option>
+
+                        <option value="Otros">
+                            📦 Otros
+                        </option>
+
+                    </select>
 
                     <input
                         type="number"
@@ -98,10 +122,12 @@
 
         </section>
 
+        <!--Boton de exportación de los datos en el excel -->
         <button id="btn-excel">
             📥 Exportar Excel
         </button>
 
+        <!--Tabla donde se muestan los productos ya registrados -->
         <section class="tabla-container">
 
             <table>
@@ -109,6 +135,7 @@
                 <thead>
                     <tr>
                         <th>Producto</th>
+                        <th>categoria</th>
                         <th>Cantidad</th>
                         <th>Precio</th>
                         <th>Estado</th>

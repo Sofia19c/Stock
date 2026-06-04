@@ -9,6 +9,12 @@ new mongoose.Schema({
         required: true
     },
 
+    categoria: {
+        type: String,
+        required: true,
+        default: "Otros"
+    },
+
     cantidad: {
         type: Number,
         required: true

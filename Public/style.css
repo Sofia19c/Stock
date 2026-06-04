@@ -359,4 +359,15 @@ tr:hover{
     #busqueda{
         width:100%;
     }
+
 }
+
+input,
+select{
+        border: nombre;
+        background: #f1f5f9;;
+        border: 1px solid  #e2e8f0;
+        border-radius: 12px;
+        padding: 14px;
+        font-size: 15px;
+    }

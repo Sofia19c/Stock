@@ -6,6 +6,7 @@ boton.addEventListener("click", async () => {
 
     //id para conectar cada casilla en html con java script
     const nombre = document.getElementById("nombre").value;
+    const categoria =document.getElementById("categoria").value;
     const cantidad = document.getElementById("cantidad").value;
     const precio = document.getElementById("precio").value;
 
@@ -17,6 +18,7 @@ boton.addEventListener("click", async () => {
      //objeto en java 
     const producto = {
         nombre,
+        categoria,
         cantidad,
         precio
     };
@@ -49,6 +51,7 @@ boton.addEventListener("click", async () => {
     document.getElementById("nombre").value = "";
     document.getElementById("cantidad").value = "";
     document.getElementById("precio").value = "";
+    //document.getElementById("categoria").value; 
 });
 
 //FUNCION PARA MOSTRAR LOS PRODUCTOS
@@ -139,6 +142,7 @@ async function cargarProductos() {
         tabla.innerHTML += `
             <tr>
                 <td>${producto.nombre}</td>
+                <td>${producto.categoria}</td>
                 <td>${producto.cantidad}</td>
                 <td>$${producto.precio}</td>
                <td class="${
