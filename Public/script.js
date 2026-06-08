@@ -1,5 +1,7 @@
+
 //AQUI IRA LA LOGICA DEL BOTON
 const boton = document.getElementById("btn-agregar");
+let graficaCategorias = null;
 
 //async dice que habran tareas que toman tiempo
 boton.addEventListener("click", async () => {
@@ -112,6 +114,11 @@ async function cargarProductos() {
             p => p.categoria === "Intercomunicadores"
         ).length;
 
+    const totalOtros =
+        productos.filter(
+            p => p.categoria === "Otros"
+        ).length;
+
     //Aqui se actualiza el total de productos 
     document.getElementById(
         "total-productos"
@@ -196,7 +203,55 @@ async function cargarProductos() {
             </tr>
         `;
     });
+
+    const ctx = document.getElementById(
+        "graficaCategorias"
+    );
+
+    if(graficaCategorias){
+        graficaCategorias.destroy();
+    }
+
+    graficaCategorias = new Chart(ctx,{
+        type:"doughnut",
+
+        data:{
+            labels:[
+                "CarPlay",
+                "Cojines",
+                "Intercomunicadores",
+                "Otros"
+            ],
+            datasets:[{
+                data:[
+                    totalCarplay,
+                    totalCojines,
+                    totalIntercom,
+                    totalOtros
+                ],
+                backgroundColor:[
+                    "#4f46e5",
+                    "#ea580c",
+                    "#16a34a",
+                    "#64748b"
+                ]
+            }]
+        },
+
+        options:{
+            responsive:true,
+            maintainAspectRatio:false,
+
+            plugins:{
+                legend:{
+                    position:"bottom"
+                }
+            }
+
+        }
+    });
 }
+
 //Recibe dos parámetros: el id del producto a modificar y el cambio (que será 1 o -1).
     async function editarCantidad(id, cambio) {
        
