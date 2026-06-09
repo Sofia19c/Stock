@@ -222,14 +222,27 @@ app.get("/exportar-excel", async (req, res) => {
                 width: 15
             },
             {
-                header: "Precio",
+                header: "Precio Unitario",
                 key: "precio",
+                width: 15
+            },
+            {
+                header: "Precio Total",
+                key: "precioTotal",
                 width: 15
             }
         ];
 
+        // Formato de moneda para Excel
+        worksheet.getColumn("precio").numFmt =
+            '$#,##0';
+
+        worksheet.getColumn("precioTotal").numFmt =
+            '$#,##0';
+
         //Agregar productos
         productos.forEach(producto => {
+
             worksheet.addRow({
                 nombre:
                     producto.nombre,
@@ -238,7 +251,12 @@ app.get("/exportar-excel", async (req, res) => {
                     producto.cantidad,
 
                 precio:
-                    producto.precio
+                    producto.precio,
+
+                precioTotal:
+                        
+                    Number(producto.precio) *
+                    Number(producto.cantidad)
             });
         });
 
