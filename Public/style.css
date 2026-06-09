@@ -405,6 +405,14 @@ select{
     margin:auto;
 }
 
+.grafica-grid{
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 .grafica-panel h3{
     margin-bottom: 20px;
 }
+

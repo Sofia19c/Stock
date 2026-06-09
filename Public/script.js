@@ -1,6 +1,6 @@
-
 //AQUI IRA LA LOGICA DEL BOTON
 const boton = document.getElementById("btn-agregar");
+let graficaStock = null;
 let graficaCategorias = null;
 
 //async dice que habran tareas que toman tiempo
@@ -118,6 +118,18 @@ async function cargarProductos() {
         productos.filter(
             p => p.categoria === "Otros"
         ).length;
+
+    const stockCarplay =
+        totalCarplay < 5 ? 1 : 0;
+
+    const stockCojines =
+        totalCojines < 5 ? 1 : 0;
+
+    const stockIntercom =
+        totalIntercom < 5 ? 1 : 0;
+
+    const stockOtros =
+        totalOtros < 5 ? 1 : 0;
 
     //Aqui se actualiza el total de productos 
     document.getElementById(
@@ -255,6 +267,78 @@ async function cargarProductos() {
 
         }
     });
+
+    const ctxStock = 
+        document.getElementById(
+            "graficaStock"
+        );
+
+    if(graficaStock){
+        graficaStock.destroy();
+    }
+
+    graficaStock =
+        new Chart(ctxStock,{
+            type:"bar",
+
+            data:{
+
+                labels:[
+                    "CarPlay",
+                    "Cojines",
+                    "Intercom"
+                ],
+
+                datasets:[{
+                    label:"Estado",
+
+                    data:[
+                        stockCarplay,
+                        stockCojines,
+                        stockIntercom
+                    ],
+
+                    backgroundColor:[
+
+                        stockCarplay === 1
+                            ? "#ef4444"
+                            : "#22c55e",
+
+                        stockCojines === 1
+                            ? "#ef4444"
+                            : "#22c55e",
+
+                        stockIntercom === 1
+                            ? "#ef4444"
+                            : "#22c55e"
+                        ],
+                    
+                    borderRadius:12
+
+                }]
+            },
+
+            options:{
+                responsive:true,
+                maintainAspectRatio:false,
+            
+                scales:{
+
+                    y:{
+                        beginAtZero:true,
+                        max:1,
+
+                        ticks:{
+                            useCallback:function(value){
+                                return value === 1
+                                ? "Poco Stock"
+                                : "OK";
+                            }
+                        }
+                    }
+                }
+            }
+        });
 }
 
 //Recibe dos parámetros: el id del producto a modificar y el cambio (que será 1 o -1).
