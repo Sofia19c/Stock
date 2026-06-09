@@ -20,7 +20,7 @@ new mongoose.Schema({
         required: true
     },
 
-    precio: {
+    precioUnitario: {
         type: Number,
         required: true
     }

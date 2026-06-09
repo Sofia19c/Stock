@@ -10,10 +10,10 @@ boton.addEventListener("click", async () => {
     const nombre = document.getElementById("nombre").value;
     const categoria =document.getElementById("categoria").value;
     const cantidad = document.getElementById("cantidad").value;
-    const precio = document.getElementById("precio").value;
+    const precioUnitario = document.getElementById("precioUnitario").value;
 
     //Aqui no permite que se guarden valores vacios, se deben completar las 3 celdas
-    if(!nombre || !cantidad ||! precio){
+    if(!nombre || !cantidad ||! precioUnitario){
         alert("completa todos los campos");
         return;
     }
@@ -22,7 +22,7 @@ boton.addEventListener("click", async () => {
         nombre,
         categoria,
         cantidad,
-        precio
+        precioUnitario
     };
 
     //fetch es la herramienta nativa de JavaScript para hacer peticiones por internet. 
@@ -52,7 +52,7 @@ boton.addEventListener("click", async () => {
     // para que este pueda funcionar, transformarlos y generar un resultado (conocido como output o salida).
     document.getElementById("nombre").value = "";
     document.getElementById("cantidad").value = "";
-    document.getElementById("precio").value = "";
+    document.getElementById("precioUnitario").value = "";
     //document.getElementById("categoria").value; 
 });
 
@@ -178,7 +178,7 @@ async function cargarProductos() {
                 <td>${producto.nombre}</td>
                 <td>${producto.categoria}</td>
                 <td>${producto.cantidad}</td>
-                <td>$${producto.precio}</td>
+                <td>$${Number(producto.precio).toLocaleString()}</td>
                <td class="${
                     Number(producto.cantidad) < 5
                         ? "stock-bajo"
