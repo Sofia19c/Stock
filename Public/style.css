@@ -417,7 +417,7 @@ select{
 
 .estado-stock-container{
     display:flex;
-    align-items:center;
+    align-items: flex-start;
     justify-content:center;
     gap:30px;
     height:100%;
@@ -426,17 +426,21 @@ select{
 .estado-resumen{
     display:flex;
     flex-direction:column;
-    gap:15px;
+    gap:25px;
+    min-width:180px;
 }
 
 .estado-item{
-    font-size:16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    font-size:18px;
     font-weight:600;
 }
 
 .estado-item span{
-    display:block;
-    margin-top:5px;
-    font-size:22px;
     color:#4f46e5;
+    font-size:32px;
+    font-weight:700;
 }
