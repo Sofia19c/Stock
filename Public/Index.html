@@ -94,13 +94,36 @@
             </div>
 
             <div class="grafica-panel">
-               <h3>
-                    ⚠ Estado de Stock
-               </h3> 
 
-               <div class="grafica-contenedor">
-                    <canvas id="graficaStock"></canvas>
-               </div>
+                <h3>⚠ Estado de Stock</h3>
+
+                <div class="estado-stock-container">
+
+                    <div class="grafica-contenedor">
+                        <canvas id="graficaStock"></canvas>
+                    </div>
+
+                    <div class="estado-resumen">
+
+                        <div class="estado-item">
+                            🟢 En stock:
+                            <span id="en-stock">0</span>
+                        </div>
+
+                        <div class="estado-item">
+                            🟠 Poco stock:
+                            <span id="poco-stock">0</span>
+                        </div>
+
+                        <div class="estado-item">
+                            🔴 Sin stock:
+                            <span id="sin-stock">0</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
         </section>
 

@@ -66,6 +66,30 @@ async function cargarProductos() {
     //Guarda la lista de productos real (un array) que ya puedo recorrer
     const productos = await respuesta.json();
 
+    const enStock = 
+        productos.filter(
+            P => Number(P.cantidad) >= 5
+        ).length;
+    
+    const pocoStock =
+            productos.filter(
+                p => 
+                    Number(p.cantidad) > 0 &&
+                    Number(p.cantidad) <= 5
+            ).length
+
+
+    const sinStock = 
+            productos.filter(
+                P => Number(P.cantidad) === 0
+            ).length
+
+    
+    const totalUnidades = productos.reduce(
+        (total, producto) => total + Number(producto.cantidad),
+        0
+    );
+
     const textoBusqueda = document.getElementById("busqueda")
     ?.value
     //Toma el texto que escribió el usuario y lo convierte por completo a minúsculas.
@@ -102,22 +126,38 @@ async function cargarProductos() {
     const totalCarplay = 
         productos.filter(
             p => p.categoria === "CarPlay"
-        ).length;
+        ).reduce(
+            (total, p) =>
+                total + Number(p.cantidad),
+            0
+        );
 
     const totalCojines =
         productos.filter(
             p => p.categoria ==="Cojines"
-        ).length;
+        ).reduce(
+            (total, p) =>
+                total + Number(p.cantidad),
+            0
+        );
 
     const totalIntercom =
         productos.filter(
             p => p.categoria === "Intercomunicadores"
-        ).length;
+        ).reduce(
+            (total, p) =>
+                total + Number(p.cantidad),
+            0
+        );
 
     const totalOtros =
         productos.filter(
             p => p.categoria === "Otros"
-        ).length;
+        ).reduce(
+            (total, p) =>
+                total + Number(p.cantidad),
+            0
+        );
 
     const stockCarplay =
         totalCarplay < 5 ? 1 : 0;
@@ -146,6 +186,18 @@ async function cargarProductos() {
     document.getElementById(
         "valor-total"
     ).textContent =  `$${valorInventario.toLocaleString()}`;
+
+    document.getElementById(
+    "en-stock"
+    ).textContent = enStock;
+
+    document.getElementById(
+        "poco-stock"
+    ).textContent = pocoStock;
+
+    document.getElementById(
+        "sin-stock"
+    ).textContent = sinStock;
 
     document.getElementById(
         "total-carplay"
@@ -279,41 +331,31 @@ async function cargarProductos() {
 
     graficaStock =
         new Chart(ctxStock,{
-            type:"bar",
+            type:"doughnut",
 
             data:{
 
                 labels:[
-                    "CarPlay",
-                    "Cojines",
-                    "Intercom"
+                    "En Stock",
+                    "Poco Stock",
+                    "Sin Stock"
                 ],
 
                 datasets:[{
-                    label:"Estado",
-
                     data:[
-                        stockCarplay,
-                        stockCojines,
-                        stockIntercom
+                        enStock,
+                        pocoStock,
+                        sinStock
                     ],
 
                     backgroundColor:[
-
-                        stockCarplay === 1
-                            ? "#ef4444"
-                            : "#22c55e",
-
-                        stockCojines === 1
-                            ? "#ef4444"
-                            : "#22c55e",
-
-                        stockIntercom === 1
-                            ? "#ef4444"
-                            : "#22c55e"
-                        ],
+                        "#22c55e",
+                        "#f59e0b",
+                        "#ef4444"
+                        
+                    ],
                     
-                    borderRadius:12
+                    borderWidth:0
 
                 }]
             },
@@ -321,20 +363,10 @@ async function cargarProductos() {
             options:{
                 responsive:true,
                 maintainAspectRatio:false,
-            
-                scales:{
 
-                    y:{
-                        beginAtZero:true,
-                        max:1,
-
-                        ticks:{
-                            useCallback:function(value){
-                                return value === 1
-                                ? "Poco Stock"
-                                : "OK";
-                            }
-                        }
+                plugins:{
+                    legend:{
+                        display:false
                     }
                 }
             }
