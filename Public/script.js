@@ -75,7 +75,7 @@ async function cargarProductos() {
             productos.filter(
                 p => 
                     Number(p.cantidad) > 0 &&
-                    Number(p.cantidad) <= 5
+                    Number(p.cantidad) < 5
             ).length
 
 
