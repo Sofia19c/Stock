@@ -225,13 +225,18 @@ async function cargarProductos() {
     //Como productos es una lista, usamos .forEach() para recorrerlos uno por uno. En cada vuelta del ciclo, 
     //el producto actual se guardará en la variable producto.
     .forEach(producto => {
-        const estado =
-            Number(producto.cantidad) < 5
-                //si la cantidad del producto es menor a 5 
-                ? "⚠ Poco stock"
-                //si es verdadero lo guarda en la variable estado con el texto Poco stock
-                : "✅ Disponible";
+        
+        let estado = "";
 
+        if(Number(producto.cantidad) === 0){
+            estado = "🔴 Sin stock";
+        }
+        else if(Number(producto.cantidad) < 5){
+            estado = "🟠 Poco stock";
+        }
+        else{
+            estado = "🟢 En stock";
+}
         const precioTotal =
             Number(producto.precio) *
             Number(producto.cantidad);
@@ -249,7 +254,9 @@ async function cargarProductos() {
                 <td>$${Number(producto.precio).toLocaleString()}</td>
                 <td>$${precioTotal.toLocaleString()}</td>
                <td class="${
-                    Number(producto.cantidad) < 5
+                    Number(producto.cantidad) === 0
+                    ? "stock-sin"
+                    :Number(producto.cantidad) < 5
                         ? "stock-bajo"
                         : "stock-ok"
                 }">
