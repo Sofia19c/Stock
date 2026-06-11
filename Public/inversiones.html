@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- idioma  -->
+<HEAD>
+    <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
+    <!--Conecta este archivo HTML con el archivo css-->
+    <link rel="stylesheet" href="style.css">
+    <link rel ="stylesheet" href="inversiones.css">
+</HEAD>
+<body>
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                📦 Inventario Pro
+            </div>
+
+            <nav>
+                <ul>
+                    <li>🏠 Dashboard</li>
+                    <li>📦 Productos</li>
+                    <li>📂 Categorías</li>
+                    <li>📥 Entradas</li>
+                    <li>📤 Salidas</li>
+                    <li class="activo">💰 Inversiones</li>
+                    <li>⚙ Configuración</li>
+                </ul>
+            </nav>
+
+        </aside>
+
+        <main class="contenido">
+
+            <header class="navbar">
+
+                <h2>💰 Inversiones</h2>
+
+                <button class="btn-nueva">
+                    + Nueva Inversión
+                </button>
+
+            </header>
+
+            <section class="dashboard">
+
+                <div class="card">
+                    <h3>Total Invertido</h3>
+                    <p id="total-invertido">$0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Total Recuperado</h3>
+                    <p id="total-recuperado">$0</p>
+                </div>
+
+                <div class="card">
+                    <h3>Inversiones Activas</h3>
+                    <p id="total-activas">0</p>
+                </div>
+
+                <div class="card">
+                    <h3>ROI Promedio</h3>
+                    <p id="roi-promedio">0%</p>
+                </div>
+            </section>
+
+            <section class="graficas-grid">
+
+                <div class="grafica-panel">
+
+                    <h3>
+                        📊 Inversión por Producto
+                    </h3>
+
+                    <div class="grafica-contenedor">
+                        <canvas id="graficaInversiones"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="grafica-panel">
+
+                    <h3>
+                        📈 Invertido vs Recuperado
+                    </h3>
+
+                    <div class="grafica-contenedor">
+                        <canvas id="graficaComparativa"></canvas>
+                    </div>
+
+                </div>
+
+                <div class="grafica-panel">
+
+                    <h3>
+                        🎯 Estado de Inversiones
+                    </h3>
+
+                    <div class="grafica-contenedor">
+                        <canvas id="graficaEstado"></canvas>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="tabla-container">
+
+                <h3>
+                    Detalle de Inversiones
+                </h3>
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+                            <th>Producto</th>
+                            <th>Invertido</th>
+                            <th>Recuperado</th>
+                            <th>Ganancia</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tabla-inversiones">
+
+                    </tbody>
+
+                </table>
+
+            </section>
+        
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="inversiones.js"></script>
+
+</body>
+</html>
