@@ -15,7 +15,7 @@ async function  cargarInversiones() {
     const totalRecuperado =
         inversiones.reduce(
             (acc, i) =>
-                acc + Number(i.totalRecuperado),
+                acc + Number(i.recuperado),
             0
         );
 
@@ -86,30 +86,74 @@ async function  cargarInversiones() {
                 : "🟠 Pendiente";
             
             tabla.innerHTML += `
-                <tr>
-                    <td>
-                        ${inversion.producto}
-                    </td>
+            <tr>
 
-                    <td>
-                        $${Number}(
-                            inversion.invertido
-                        ).toLocaleString()}
-                    </td>
+                <td>
+                    ${inversion.producto}
+                </td>
 
-                    <td>
-                        ${estado}
-                    </td>
+                <td>
+                    $${Number(
+                        inversion.invertido
+                    ).toLocaleString()}
+                </td>
 
-                    <td>
-                        🗑️
-                    </td>
-                </tr>
-           `; 
+                <td>
+                    $${Number(
+                        inversion.recuperado
+                    ).toLocaleString()}
+                </td>
+
+                <td>
+                    $${ganancia.toLocaleString()}
+                </td>
+
+                <td>
+                    ${estado}
+                </td>
+
+                <td>
+                    🗑️
+                </td>
+
+            </tr>
+            `;
         }
     );
 }
 
 cargarInversiones();
+
+const botonNueva =
+    document.querySelector(
+        ".btn-nueva"
+    );
+
+const modal =
+    document.getElementById(
+        "modal-inversion"
+    );
+
+botonNueva.addEventListener(
+    "click",
+    () => {
+
+        modal.style.display =
+            "flex";
+
+    }
+);
+
+modal.addEventListener(
+    "click",
+    (e) => {
+        if(
+            e.target === modal
+        ){
+            modal.style.display =
+                "none";
+        }
+    }
+);
 
 
