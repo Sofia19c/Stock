@@ -1,6 +1,8 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
 
+const Inversion = require("./models/inversion");
+
 const Producto =
 require("./models/producto");
 //Importa la librería Express, que sirve para crear servidores web y APIs
@@ -287,7 +289,37 @@ app.get("/exportar-excel", async (req, res) => {
     }
 });
 
+app.post("/inversiones", async (req,res)=> {
+    const nuevaInversion = 
+    new Inversion(req.body);
+
+    await nuevaInversion.save();
+
+    res.json({
+        mensaje:"Inversión guardada"
+    });
+});
+
 app.listen(PORT, () => { //escucha en el puerto
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
+});
+
+app.get("/inversiones", async (req,res)=> {
+    const inversiones =
+    await Inversion.find();
+
+    res.json(inversiones);
+});
+
+app.delete("/inversiones/:id", async(req,res)=>{
+
+    await Inversion.findByIdAndDelete(
+        req.params.id
+    );
+
+    res.json({
+       mensaje:"Inversión eliminada" 
+    });
+
 });
 
