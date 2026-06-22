@@ -17,12 +17,19 @@
 
             <nav>
                 <ul>
-                    <li>🏠 Dashboard</li>
+                    <li>
+                        <a href="index.html">
+                            🏠 Dashboard
+                        </a>
+                    </li>
                     <li>📦 Productos</li>
-                    <li>📂 Categorías</li>
-                    <li>📥 Entradas</li>
-                    <li>📤 Salidas</li>
-                    <li class="activo">💰 Inversiones</li>
+                    <li>📂 Reservas</li>
+                    <li>
+                        <a href="inversiones.html">
+                            💰 Inversiones
+                        </a>
+                    </li>
+                    <li>📊 Reportes</li>
                     <li>⚙ Configuración</li>
                 </ul>
             </nav>
@@ -143,10 +150,11 @@
 
             <h3>Nueva Inversión</h3>
 
-            <input
-                id="producto"
-                placeholder="Producto"
-            >
+            <select id="producto">
+                <option value="">
+                    Selecciona un producto
+                </option>
+            </select>
 
             <input
                 id="invertido"

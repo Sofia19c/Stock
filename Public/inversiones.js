@@ -1,3 +1,35 @@
+async function cargarProductosModal() {
+    const respuesta =
+        await fetch("/productos");
+    
+    const productos =
+        await respuesta.json();
+
+    console.log(productos);
+
+    const select = 
+        document.getElementById(
+            "producto"
+        );
+    
+    select.innerHTML = `
+        <option value ="">
+            selecciona un producto
+        </option>
+    `;
+
+    productos.forEach(
+        producto => {
+
+            select.innerHTML +=  `
+                <option value="${producto.nombre}">
+                    ${producto.nombre}
+                </option>
+            `;
+        }
+    );
+}
+
 async function  cargarInversiones() {
     const respuesta =
         await fetch("/inversiones");
@@ -155,5 +187,76 @@ modal.addEventListener(
         }
     }
 );
+
+const botonGuardar =
+document.getElementById(
+    "guardar-inversion"
+);
+
+botonGuardar.addEventListener(
+    "click",
+    async () => {
+        const producto = 
+            document.getElementById(
+                "producto"
+            ).value;
+
+        const invertido =
+            document.getElementById(
+                "invertido"
+            ).value;
+        
+        const recuperado =
+            document.getElementById(
+                "recuperado"
+            ).value;
+
+        if(
+            !producto ||
+            !invertido
+        ){
+            alert(
+                "completa todos los campos"
+            );
+            return;
+        }
+
+        await fetch(
+            "/inversiones",
+            {
+                method:"POST",
+
+                headers:{
+                    "content-Type":
+                    "application/json"
+                },
+
+                body:JSON.stringify({
+                    producto,
+                    invertido,
+                    recuperado
+                })
+            }
+        );
+
+        modal.style.display =
+            "none";
+        
+        document.getElementById(
+            "producto"
+        ).value = "";
+        
+        document.getElementById(
+            "recuperado"
+        ).value = "";
+
+        cargarProductosModal();
+    }
+);
+
+cargarInversiones();
+cargarProductosModal();
+
+
 
 

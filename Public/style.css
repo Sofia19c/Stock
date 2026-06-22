@@ -449,3 +449,14 @@ select{
     font-size:32px;
     font-weight:700;
 }
+
+.sidebar a{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    width:100%;
+}
+
+.sidebar li{
+    cursor:pointer;
+}

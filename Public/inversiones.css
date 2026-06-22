@@ -84,3 +84,14 @@
 
     cursor:pointer;
 }
+
+.sidebar a{
+    text-decoration:none;
+    color:inherit;
+    display:block;
+    width:100%;
+}
+
+.sidebar li{
+    cursor:pointer;
+}
