@@ -28,6 +28,12 @@ async function cargarProductosModal() {
             `;
         }
     );
+
+    select.innerHTML += `
+        <option value="OTRO">
+            Otro...
+        </option>
+    `;
 }
 
 async function  cargarInversiones() {
@@ -165,6 +171,46 @@ const modal =
     document.getElementById(
         "modal-inversion"
     );
+
+const selectPrducto =
+    document.getElementById(
+        "producto"
+    );
+
+const inputOtro =
+    document.getElementById(
+        "producto-otro"
+    );
+
+selectPrducto.addEventListener(
+    "change",
+    () => {
+        if(
+            selectPrducto.value ===
+            "OTRO"
+        ){
+            inputOtro.style.display =
+                "block";
+        }
+        else{
+            inputOtro.style.display =
+                "none";
+        }
+    }
+);    
+
+let producto =
+    document.getElementById(
+        "producto"
+    ).value;
+
+if(producto === "OTRO"){
+    producto =
+        document.getElementById(
+            "producto-otro"
+        ).value
+}
+
 
 botonNueva.addEventListener(
     "click",
