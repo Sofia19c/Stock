@@ -129,6 +129,14 @@ async function  cargarInversiones() {
                 <td>
                     ${inversion.producto}
                 </td>
+                <td>
+                    ${
+                        inversion.tipo ===
+                        "Gasto"
+                        ? "💸 Gasto"
+                        : "📦 Inventario"
+                    }
+                </td>
 
                 <td>
                     $${Number(
@@ -172,7 +180,7 @@ const modal =
         "modal-inversion"
     );
 
-const selectPrducto =
+const selectProducto =
     document.getElementById(
         "producto"
     );
@@ -182,11 +190,11 @@ const inputOtro =
         "producto-otro"
     );
 
-selectPrducto.addEventListener(
+selectProducto.addEventListener(
     "change",
     () => {
         if(
-            selectPrducto.value ===
+            selectProducto.value ===
             "OTRO"
         ){
             inputOtro.style.display =
@@ -198,19 +206,6 @@ selectPrducto.addEventListener(
         }
     }
 );    
-
-let producto =
-    document.getElementById(
-        "producto"
-    ).value;
-
-if(producto === "OTRO"){
-    producto =
-        document.getElementById(
-            "producto-otro"
-        ).value
-}
-
 
 botonNueva.addEventListener(
     "click",
@@ -242,11 +237,24 @@ document.getElementById(
 botonGuardar.addEventListener(
     "click",
     async () => {
-        const producto = 
-            document.getElementById(
-                "producto"
-            ).value;
+       let producto =
+    document.getElementById(
+        "producto"
+    ).value;
 
+        let tipo =
+            "Inventario";
+
+        if(producto === "OTRO"){
+            producto =
+                document.getElementById(
+                    "producto-otro"
+                ).value
+            
+            tipo =
+                "Gasto";
+        }
+        
         const invertido =
             document.getElementById(
                 "invertido"
@@ -279,6 +287,7 @@ botonGuardar.addEventListener(
 
                 body:JSON.stringify({
                     producto,
+                    tipo,
                     invertido,
                     recuperado
                 })

@@ -8,6 +8,11 @@ new moongose.Schema({
         required:true
     },
 
+    tipo:{
+    type:String,
+    default:"Inventario"
+    },
+
     invertido:{
         type:Number,
         required:true
@@ -22,7 +27,6 @@ new moongose.Schema({
         type:Date,
         default:Date.now
     }
-
 });
 
 module.exports =
