@@ -285,8 +285,7 @@ botonGuardar.addEventListener(
                 method:"POST",
 
                 headers:{
-                    "content-Type":
-                    "application/json"
+                    "content-Type":"application/json"
                 },
 
                 body:JSON.stringify({
@@ -310,6 +309,7 @@ botonGuardar.addEventListener(
         ).value = "";
 
         cargarProductosModal();
+        cargarInversiones();
     }
 );
 
