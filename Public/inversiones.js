@@ -36,12 +36,28 @@ async function cargarProductosModal() {
     `;
 }
 
+let graficaInversiones = null;
+
 async function  cargarInversiones() {
     const respuesta =
         await fetch("/inversiones");
 
     const inversiones =
         await respuesta.json();
+
+    const nombresProductos =
+        inversiones.map(
+            inversion => 
+                inversion.producto
+        );
+
+    const valoresInvertidos =
+        inversiones.map(
+            inversion =>
+                Number(
+                    inversion.invertido
+                )
+        );
 
     const totalInvertido =
         inversiones.reduce(
@@ -170,6 +186,58 @@ async function  cargarInversiones() {
             `;
         }
     );
+
+    //aqui obtiene el elemento HTML (graficaInversiones) y lo guarda en ctx
+    const ctx = 
+        document.getElementById(
+            "graficaInversiones"
+        );
+    //Aqui verifica si ya habia una grafica existente, de ser asi, destruyala
+    if(graficaInversiones){
+        graficaInversiones.destroy();
+    }
+
+    //crea una instancia de Chart, ctx indica dibujar la grafica
+    // y el otro parametro es la configuracion de la tabla (,)
+    graficaInversiones = 
+        new Chart(ctx,{
+            //tipo de tabla barras
+            type:"bar",
+
+            data:{
+
+                labels:
+                    nombresProductos, 
+
+                datasets:[{
+                    label:
+                        "Valor Invertido",
+
+                    data:
+                        valoresInvertidos,
+                    
+                    background:
+                        "#4f46e5",
+                    
+                    borderRadius:
+                        8
+                }]
+
+            },
+
+            options:{
+
+                responsive:true,
+
+                maintainAspectRatio: false,
+
+                plugins:{
+                    legend:{
+                        display:false
+                    }
+                }
+            }
+        });
 }
 
 cargarInversiones();
@@ -303,9 +371,17 @@ botonGuardar.addEventListener(
         document.getElementById(
             "producto"
         ).value = "";
+
+        document.getElementById(
+            "invertido"
+        ).value = "";
         
         document.getElementById(
             "recuperado"
+        ).value = "";
+
+        document.getElementById(
+            "producto-otro"
         ).value = "";
 
         cargarProductosModal();
