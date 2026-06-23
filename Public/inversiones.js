@@ -159,7 +159,11 @@ async function  cargarInversiones() {
                 </td>
 
                 <td>
-                    🗑️
+                    <button
+                        onclick ="eliminarInversion('${inversion._id}')"
+                    >
+                        🗑️
+                    </button>
                 </td>
 
             </tr>
@@ -310,7 +314,32 @@ botonGuardar.addEventListener(
 );
 
 cargarInversiones();
+async function eliminarInversion(id) {
+    //ventana emergente de confirmación al usuario
+    const confirmar =
+        confirm(
+            "¿Deseas eliminar esta inversion?"
+        );
+
+        if(!confirmar){
+            return;
+        }
+
+        //llama la función fetch()para hacer una petición HTTP
+        //await hace que la función esepere hasta que la petición termine antes de continuar
+        await fetch(
+            //Define la URL a la que se enviará la petición
+            `/inversiones/${id}`,
+            {
+                //configuracion de la peticion HTTP
+                method:"DELETE"
+            }
+        );
+
+        cargarInversiones();
+}
 cargarProductosModal();
+
 
 
 

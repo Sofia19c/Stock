@@ -300,6 +300,29 @@ app.post("/inversiones", async (req,res)=> {
     });
 });
 
+app.delete(
+    "/inversiones/:id",
+    async (req,res) => {
+
+        try{
+            await Inversion.findByIdAndDelete(
+                req.params.id
+            );
+
+            res.json({
+                mensaje: "Inversion eliminada"
+            });
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje: "Error eliminando inversión"
+            });
+        }
+    }
+
+);
+
 app.listen(PORT, () => { //escucha en el puerto
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
