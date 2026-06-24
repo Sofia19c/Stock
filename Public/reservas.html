@@ -5,6 +5,7 @@
     <!--Conecta este archivo HTML con el archivo css-->
     <link rel="stylesheet" href="style.css">
     <link rel ="stylesheet" href="inversiones.css">
+    <link rel ="stylesheet" href="reservas.css">
 </HEAD>
 <body>
     <div class="layout">
@@ -39,39 +40,37 @@
             </nav>
 
         </aside>
-
         <main class="contenido">
-
             <header class="navbar">
-
-                <h2>💰 Inversiones</h2>
+                <h2>
+                    📅 Reservas
+                </h2>
 
                 <button class="btn-nueva">
-                    + Nueva Inversión
+                    + Nueva Reserva
                 </button>
 
             </header>
 
             <section class="dashboard">
-
                 <div class="card">
-                    <h3>Total Invertido</h3>
-                    <p id="total-invertido">$0</p>
+                    <h3>Reservas Activas</h3>
+                        <p id="total-reservas">0</p>
                 </div>
 
                 <div class="card">
-                    <h3>Total Recuperado</h3>
-                    <p id="total-recuperado">$0</p>
+                    <h3>Productos Reservados</h3>
+                    <p id="total-productos">0</p>
                 </div>
 
                 <div class="card">
-                    <h3>Inversiones Activas</h3>
-                    <p id="total-activas">0</p>
+                    <h3>Entregadas</h3>
+                    <p id="total-entregadas">0</p>
                 </div>
 
                 <div class="card">
-                    <h3>ROI Promedio</h3>
-                    <p id="roi-promedio">0%</p>
+                    <h3>Canceladas</h3>
+                    <p id="total-canceladas">0</p>
                 </div>
             </section>
 
@@ -80,115 +79,82 @@
                 <div class="grafica-panel">
 
                     <h3>
-                        📊 Inversión por Producto
+                        📊 Reservas por Producto
                     </h3>
 
                     <div class="grafica-contenedor">
-                        <canvas id="graficaInversiones"></canvas>
+                        <canvas id="graficaReservas"></canvas>
                     </div>
-
                 </div>
 
                 <div class="grafica-panel">
 
                     <h3>
-                        📈 Invertido vs Recuperado
-                    </h3>
-
-                    <div class="grafica-contenedor">
-                        <canvas id="graficaComparativa"></canvas>
-                    </div>
-
-                </div>
-
-                <div class="grafica-panel">
-
-                    <h3>
-                        🎯 Estado de Inversiones
+                        🎯 Estado de Reservas
                     </h3>
 
                     <div class="grafica-contenedor">
                         <canvas id="graficaEstado"></canvas>
                     </div>
-
                 </div>
-
             </section>
 
             <section class="tabla-container">
 
                 <h3>
-                    Detalle de Inversiones
+                    Detalle de reservas
                 </h3>
 
                 <table>
-
                     <thead>
-
                         <tr>
+
+                            <th>Cliente</th>
                             <th>Producto</th>
-                            <th>Tipo</th>
-                            <th>Invertido</th>
-                            <th>Recuperado</th>
-                            <th>Ganancia</th>
+                            <th>Cantidad</th>
+                            <th>Fecha</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
-
                     </thead>
 
-                    <tbody id="tabla-inversiones">
+                    <tbody id="tabla-reservas"> 
 
                     </tbody>
-
                 </table>
-
             </section>
-        
         </main>
-    </div>
 
-    <!--MODAL NUEVA INVERSION-->
-    <div id="modal-inversion" class="modal">
+        <div id="modal-reserva" class="modal">
+            <div class="modal-content">
 
-        <div class="modal-content">
+                <h3>
+                    Nueva Reserva
+                </h3>
 
-            <h3>Nueva Inversión</h3>
+                <input
+                    id="cliente"
+                    placeholder="Nombre del cliente"
+                >
 
-            <select id="producto">
-                <option value="">
-                    Selecciona un producto
-                </option>
-            </select>
+                <select id="producto">
 
-            <input
-                    id="producto-otro"
-                    placeholder="Escribe el producto"
-                    style="display:none;"
-            >
+                </select>
 
-            <input
-                id="invertido"
-                type="number"
-                placeholder="Valor Invertido"
-            >
+                <input
+                    id="cantidad"
+                    type="number"
+                    placeholder="Cantidad"  
+                >
 
-            <input
-                id="recuperado"
-                type="number"
-                placeholder="Valor Recuperado"
-            >
-
-            <button id="guardar-inversion">
-                Guardar
-            </button>
-
+                <button id="guardar-reserva">
+                    Guardar
+                </button>
+            </div>
         </div>
 
-    </div>
-    
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="inversiones.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="reservas.js"></script>
 </body>
 </html>
