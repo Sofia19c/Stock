@@ -164,6 +164,28 @@ async function  cargarInversiones() {
                     $${Number(
                         inversion.recuperado
                     ).toLocaleString()}
+
+                    <br>
+
+                    <button
+                        onclick="
+                        editarRecuperado(
+                            '${inversion._id}',
+                            10000    
+                        )"
+                    >
+                        +
+                    </button>
+
+                    <button
+                        onclick="
+                        editarRecuperado(
+                            '${inversion._id}',
+                            -10000
+                        )"
+                    >
+                        -
+                    </button>
                 </td>
 
                 <td>
@@ -192,6 +214,23 @@ async function  cargarInversiones() {
         document.getElementById(
             "graficaInversiones"
         );
+    
+    const gradient =
+            ctx.getContext("2d")
+            .createLinearGradient(
+                0,0,0,250
+            );
+
+        gradient.addColorStop(
+            0,
+             "#6366f1"
+        );
+
+        gradient.addColorStop(
+            1,
+            "#4f46e5"
+        );
+    
     //Aqui verifica si ya habia una grafica existente, de ser asi, destruyala
     if(graficaInversiones){
         graficaInversiones.destroy();
@@ -216,11 +255,10 @@ async function  cargarInversiones() {
                     data:
                         valoresInvertidos,
                     
-                    background:
-                        "#4f46e5",
+                    backgroundColor:
+                        gradient,
                     
-                    borderRadius:
-                        8
+                    borderRadius: 8
                 }]
 
             },
@@ -234,6 +272,15 @@ async function  cargarInversiones() {
                 plugins:{
                     legend:{
                         display:false
+                    }
+                }
+            },
+
+            scales:{
+                x:{
+                    ticks:{
+                        maxRotation:0,
+                        minRotation:0
                     }
                 }
             }
@@ -413,6 +460,30 @@ async function eliminarInversion(id) {
         );
 
         cargarInversiones();
+}
+
+async function editarRecuperado(
+    id, 
+    cambio 
+){
+    await fetch(
+        `/inversiones/${id}`,
+        {
+            method:"PUT",
+            
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+                cambio
+            })
+        }
+    );
+
+    cargarInversiones();
+    
 }
 cargarProductosModal();
 

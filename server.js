@@ -323,6 +323,44 @@ app.delete(
 
 );
 
+app.put(
+
+    "/inversiones/:id",
+    async (req, res) =>{
+        try{
+            const inversion =
+                await Inversion.findById(
+                    req.params.id
+                );
+            
+            inversion.recuperado +=
+                Number(
+                    req.body.cambio
+                );
+            
+            if(
+                inversion.recuperado < 0
+            ){
+                inversion.recuperado = 0;
+            }
+
+            await inversion.save();
+
+            res.json({
+                mensaje:
+                "Actualizado"
+            });
+        }catch(error){
+            consol.log(error); 
+
+            res.status(500).json({
+                mensaje:
+                "Error"
+            });
+        }
+    }
+)
+
 app.listen(PORT, () => { //escucha en el puerto
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
