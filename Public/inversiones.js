@@ -1,3 +1,8 @@
+//const inversion = require("../models/inversion");
+
+let graficaComparativa = null;
+let graficaEstado = null;
+
 async function cargarProductosModal() {
     const respuesta =
         await fetch("/productos");
@@ -80,6 +85,75 @@ async function  cargarInversiones() {
                 Number(i.invertido)
         ).length;
     
+    const recuperadas = 
+        inversiones.filter(
+            inversion =>
+                Number(
+                    inversion.invertido
+                )
+        ).length;
+
+    const pendientes =
+        inversiones.filter(
+            inversion =>
+                Number(
+                    inversion.recuperado
+                ) <
+                Number(
+                    inversion.invertido
+                )
+            ).length;
+    
+    const ctxEstado =
+        document.getElementById(
+            "graficaEstado"
+        );
+    
+    if (graficaEstado){
+        graficaEstado.destroy();
+    }
+    
+    graficaEstado =
+        new Chart(
+            ctxEstado,
+            {
+                type:"doughnut",
+
+                data:{
+
+                    labels:[
+                        "recuperadas",
+                        "pendientes"
+                    ],
+
+                    datasets:[{
+                        
+                        data:[
+                            recuperadas,
+                            pendientes
+                        ],
+
+                        backgroundColor:[
+                            "#22c55e",
+                            "#f59e0b"
+                        ]
+                    }]
+                },
+
+                option:{
+
+                    responsive: true,
+                    maintainAspectRatio: false,
+
+                    plugins:{
+                        legend:{
+                            position:"bottom"
+                        }
+                    }
+                }
+            }
+        );
+        
     const roi =
         totalInvertido > 0
         ? (
@@ -285,6 +359,60 @@ async function  cargarInversiones() {
                 }
             }
         });
+
+    // grafica de inversion vs recuperado
+    const ctxComparativa =
+        document.getElementById(
+            "graficaComparativa"
+        );
+
+    if(graficaComparativa){
+        graficaComparativa.destroy();
+    }
+
+    graficaComparativa =
+        new Chart(
+            ctxComparativa,
+            {
+                type:"bar",
+
+                data:{
+
+                    labels:[
+                        "Invertido",
+                        "Recuperado"
+                    ],
+
+                    datasets:[{
+                        data:[
+                            totalInvertido,
+                            totalRecuperado
+                        ],
+
+                        backgroundColor:[
+                            "#4f46e5",
+                            "#22c55e"
+                        ],
+
+                        borderRadius: 8
+                    }]
+                },
+
+                options:{
+
+                    responsive: true,
+                    
+                    maintainAspectRatio: false,
+
+                    plugins:{
+                        legend:{
+                            display:false
+                        }
+
+                    }
+                }
+            }
+        );
 }
 
 cargarInversiones();
