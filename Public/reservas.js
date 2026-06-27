@@ -128,17 +128,139 @@ async function guardarReserva(){
     cargarReservas();
 }
 
-async function cargarReservas() {
+async function cargarReservas(){
 
-    const respuesta = 
-        await fetch(
-            "/reservas"
-        );
+    const respuesta =
+        await fetch("/reservas");
 
-    const reservas = 
+    const reservas =
         await respuesta.json();
 
-    console.log(reservas);
+    document.getElementById(
+        "total-reservas"
+    ).textContent =
+        reservas.filter(
+            r => r.estado === "Reservada"
+        ).length;
+
+    document.getElementById(
+        "total-entregadas"
+    ).textContent =
+        reservas.filter(
+            r => r.estado === "Entregada"
+        ).length;
+
+    document.getElementById(
+        "total-canceladas"
+    ).textContent =
+        reservas.filter(
+            r => r.estado === "Cancelada"
+        ).length;
+
+    const totalProductos =
+        reservas.reduce(
+            (acc,reserva)=>
+                acc + Number(reserva.cantidad),
+            0
+        );
+
+    document.getElementById(
+        "total-productos"
+    ).textContent =
+        totalProductos;
+
+    const tabla =
+        document.getElementById(
+            "tabla-reservas"
+        );
+
+    tabla.innerHTML="";
+
+    reservas.forEach(
+        reserva=>{
+
+            tabla.innerHTML +=`
+
+            <tr>
+
+                <td>${reserva.cliente}</td>
+
+                <td>${reserva.producto}</td>
+
+                <td>${reserva.cantidad}</td>
+
+                <td>
+
+                    ${
+                        new Date(
+                            reserva.fecha
+                        ).toLocaleDateString()
+                    }
+
+                </td>
+
+                <td>
+
+                    ${reserva.estado}
+
+                </td>
+
+                <td>
+
+                    <button
+                        onclick="entregarReserva('${reserva._id}')"
+                    >
+                        ✅
+                    </button>
+
+                    <button
+                        onclick="eliminarReserva('${reserva._id}')"
+                    >
+                        🗑️
+                    </button>
+
+                </td>
+
+            </tr>
+
+            `;
+
+        }
+    );
+
+}
+
+async function eliminarReserva(id) {
+
+    const confirmar =
+        confirm(
+            "¿Deseas eliminar esta reserva?"
+        );
+
+        if(!confirmar){
+            return;
+        }
+
+        await fetch(
+            `/reservas/${id}`,
+            {
+                method:"DELETE"
+            }
+        );
+
+        cargarReservas();
+}
+
+async function entregarReserva(id){
+
+    await fetch(
+        `/reservas/${id}`,
+        {
+            method:"PATCH"
+        }
+    );
+
+    cargarReservas();
 }
 
 cargarReservas();

@@ -423,3 +423,61 @@ app.post(
     }
 );
 
+app.delete(
+    "/reservas/:id",
+    async (req,res)=>{
+        try{
+
+            await Reserva.findByIdAndDelete(
+                req.params.id
+            );
+
+            res.json({
+                mensaje:
+                "Reserva eliminada"
+            });
+
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:
+                "Error eliminando reserva"
+            });
+        }
+    }
+);
+
+app.patch(
+    "/reservas/:id",
+    async(req,res)=>{
+
+        try{
+
+            await Reserva.findByIdAndUpdate(
+
+                req.params.id,
+
+                {
+                    estado:"Entregada"
+                }
+
+            );
+
+            res.json({
+                mensaje:"Reserva entregada"
+            });
+
+        }catch(error){
+
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:"Error"
+            });
+
+        }
+
+    }
+);
+
