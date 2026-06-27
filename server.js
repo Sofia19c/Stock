@@ -387,7 +387,7 @@ app.delete("/inversiones/:id", async(req,res)=>{
 
 app.get("/reservas", async(req,res) =>{
     try{
-        const reservas = await Reservas.find();
+        const reservas = await Reserva.find();
         res.json(reservas);
 
     }catch(error){
