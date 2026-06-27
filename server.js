@@ -3,8 +3,9 @@ const mongoose = require("mongoose");
 
 const Inversion = require("./models/inversion");
 
-const Producto =
-require("./models/producto");
+const Producto = require("./models/producto");
+
+const Reserva = require("./models/reserva");
 //Importa la librería Express, que sirve para crear servidores web y APIs
 const { error } = require("console");
 const express = require("express");
@@ -383,4 +384,42 @@ app.delete("/inversiones/:id", async(req,res)=>{
     });
 
 });
+
+app.get("/reservas", async(req,res) =>{
+    try{
+        const reservas = await Reservas.find();
+        res.json(reservas);
+
+    }catch(error){
+        
+        console.log(error);
+        
+        res.status(500).json({
+            mensaje:
+            "Error leyendo reservas"
+        });
+    }
+});
+
+app.post(
+    "/reservas", 
+    async (req,res)=>{
+        try{
+            const nuevaReserva = new Reserva(req.body);
+            await nuevaReserva.save();
+
+            res.json({
+                mensaje: 
+                "Reserva guardada"
+            });
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:
+                "Error guardando reserva"
+            });
+        }
+    }
+);
 
