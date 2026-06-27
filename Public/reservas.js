@@ -1,3 +1,5 @@
+//const reserva = require("../models/reserva");
+
 let graficaReservas = null;
 let graficaEstado = null;
 
@@ -157,13 +159,18 @@ async function cargarReservas(){
             r => r.estado === "Cancelada"
         ).length;
 
+    //aqui la tarjeta se actualiza automaticamente 
     const totalProductos =
-        reservas.reduce(
-            (acc,reserva)=>
-                acc + Number(reserva.cantidad),
-            0
-        );
-
+        reservas
+            .filter(
+                reserva =>
+                    reserva.estado === "Reservada"
+            )
+            .reduce(
+                (acc, reserva) =>
+                    acc + Number(reserva.cantidad),
+                0
+            );
     document.getElementById(
         "total-productos"
     ).textContent =
