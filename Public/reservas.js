@@ -235,6 +235,183 @@ async function cargarReservas(){
         }
     );
 
+    const productos = {};
+
+    //aqui se suman la cantidad de productos reservados en un diccionario llamado productos
+    reservas.forEach(
+        reserva => {
+            if(
+                //Aqui se recorre la lista de reservas uno por uno 
+                reserva.estado ===
+                "Reservada"
+            ){
+                if(
+                    !productos[
+                    reserva.producto
+                    ]
+                ){
+                   productos[
+                    reserva.producto
+                   ] = 0;
+                }
+                productos[
+                        reserva.producto
+                    ] += Number(
+                        reserva.cantidad
+                    );
+
+                
+            }
+        }
+    );
+
+    const nombresProductos = 
+        Object.keys(productos);
+
+    const cantidades =
+        Object.values(productos);
+
+    //creamos la grafica
+
+    const ctx = 
+        document.getElementById(
+            "graficaReservas"
+        );
+    
+    const gradient =
+        ctx.getContext("2d")
+            .createLinearGradient(
+                0,
+                0,
+                0,
+                250
+            );
+    gradient.addColorStop(
+        0,
+        "#818cf8"
+    );
+
+    gradient.addColorStop(
+        1,
+        "#4f46e5"
+    );
+
+    if(graficaReservas){
+        graficaReservas.destroy();
+    }
+
+    graficaReservas =
+        new Chart(
+            ctx,
+            {
+                type:"bar",
+
+                data:{
+                    labels:
+                        nombresProductos,
+
+                    datasets:[{
+                        data:
+                            cantidades,
+                        
+                        backgroundColor:
+                            gradient,
+                        
+                        borderRadius:19
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false,
+
+                    plugins:{
+                        legend:{
+                            display:false
+                        }
+                    },
+
+                    scales:{
+                        y:{
+                            beginAtZero:true
+                        }
+                    }
+                }
+            }
+        );
+
+    const reservadas = 
+        reservas.filter(
+            r => 
+                r.estado ===
+                "Reservada"
+        ).length;
+
+    const entregadas = 
+        reservas.filter(
+            r => 
+                r.estado ===
+                "Entregada"
+        ).length;
+
+    const canceladas =
+        reservas.filter(
+            r => 
+                r.estado ===
+                "Cancelada"
+        ).length;
+
+    const ctxEstado =
+        document.getElementById(
+            "graficaEstado"
+        );
+
+    if(graficaEstado){
+        graficaEstado.destroy();
+    }
+
+    graficaEstado = 
+        new Chart(
+            ctxEstado,
+            {
+                type:"doughnut",
+
+                data:{
+                    labels:[
+                        "Reservadas",
+                        "Entregadas",
+                        "Canceladas"
+                    ],
+
+                    datasets:[{
+
+                        data:[
+                            reservadas,
+                            entregadas,
+                            canceladas
+                        ],
+
+                        backgroundColor:[
+                            "#f59e0b",
+                            "#22c55e",
+                            "#ef4444"
+                        ],
+                        borderWidth:0
+
+                    }]
+                },
+
+                options:{
+                    responsive:true,
+                    maintainAspectRatio:false,
+                    plugins:{
+                        legend:{
+                            position:"bottom"
+                        }
+                    }
+                }
+            }
+        );
 }
 
 async function eliminarReserva(id) {
