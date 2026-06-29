@@ -221,6 +221,14 @@ async function cargarReservas(){
                     </button>
 
                     <button
+                        class="btn-cancelar"
+                        onclick="cancelarReserva('${reserva._id}')"
+                        title="Cancelar"
+                    >
+                        ❌
+                    </button>
+
+                    <button
                         onclick="eliminarReserva('${reserva._id}')"
                     >
                         🗑️
@@ -439,6 +447,18 @@ async function entregarReserva(id){
 
     await fetch(
         `/reservas/${id}`,
+        {
+            method:"PATCH"
+        }
+    );
+
+    cargarReservas();
+}
+
+async function cancelarReserva(id) {
+    await fetch(
+        `/reservas/cancelar/${id}`,
+
         {
             method:"PATCH"
         }

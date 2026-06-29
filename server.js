@@ -481,3 +481,28 @@ app.patch(
     }
 );
 
+app.patch(
+    "/reservas/cancelar/:id",
+    async (req,res)=>{
+
+        try{
+            await Reserva.findByIdAndUpdate(
+                req.params.id,
+                {
+                    estado:"Cancelada"
+                }
+            );
+
+            res.json({
+                mensaje:"Reserva cancelada"
+            });
+
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:"Error"
+            });
+        }
+    }
+);
