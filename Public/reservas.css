@@ -16,11 +16,14 @@
     display:grid;
 
     grid-template-columns:
-        1fr 1fr 1fr;
+        repeat(2, minmax(350px, 500px));
 
-    gap:20px;
+    justify-content:center;
+
+    gap:30px;
 
     margin-bottom:30px;
+
 }
 
 .grafica-contenedor{
