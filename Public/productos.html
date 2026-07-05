@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel ="stylesheet" href="inversiones.css">
     <link rel ="stylesheet" href="reservas.css">
+    <link rel ="stylesheet" href="productos.css">
 </HEAD>
 <body>
     <div class="layout">
@@ -47,118 +48,138 @@
         <main class="contenido">
             <header class="navbar">
                 <h2>
-                    📅 Reservas
+
+                    📦 Productos
+
                 </h2>
 
-                <button class="btn-nueva">
-                    + Nueva Reserva
+                <button class="btn-nuevo">
+
+                    + Nuevo Producto
+
                 </button>
-
             </header>
-
             <section class="dashboard">
                 <div class="card">
-                    <h3>Reservas Activas</h3>
-                        <p id="total-reservas">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Productos Reservados</h3>
-                    <p id="total-productos">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Entregadas</h3>
-                    <p id="total-entregadas">0</p>
-                </div>
-
-                <div class="card">
-                    <h3>Canceladas</h3>
-                    <p id="total-canceladas">0</p>
-                </div>
-            </section>
-
-            <section class="graficas-grid">
-
-                <div class="grafica-panel">
-
                     <h3>
-                        📊 Reservas por Producto
+                        📦 Total Productos
+                    </h3>
+                    <p id="total-productos">
+                        0
+                    </p>
+                </div>
+
+                <div class="card">
+                    <h3>
+                        📚 Stock Total
                     </h3>
 
-                    <div class="grafica-contenedor">
-                        <canvas id="graficaReservas"></canvas>
-                    </div>
+                    <p id="stock-total">
+                        0
+                    </p>
                 </div>
 
-                <div class="grafica-panel">
-
+                <div class ="card">
                     <h3>
-                        🎯 Estado de Reservas
+                        🟠 Poco Stock
                     </h3>
 
-                    <div class="grafica-contenedor">
-                        <canvas id="graficaEstado"></canvas>
-                    </div>
+                    <p id="poco-stock">
+                        0
+                    </p>
+                </div>
+
+                <div class ="card">
+                    <h3>
+                         🔴 Sin Stock
+                    </h3>
+
+                    <p id="sin-stock">
+                        0
+                    </p>
                 </div>
             </section>
 
             <section class="tabla-container">
 
                 <h3>
-                    Detalle de reservas
+                    Lista de Productos
                 </h3>
 
                 <table>
+
                     <thead>
+
                         <tr>
 
-                            <th>Cliente</th>
                             <th>Producto</th>
-                            <th>Cantidad</th>
-                            <th>Fecha</th>
-                            <th>Estado</th>
+
+                            <th>Categoría</th>
+
+                            <th>Stock</th>
+
+                            <th>Compra</th>
+
+                            <th>Venta</th>
+
+                            <th>Estado</th> 
+
                             <th>Acciones</th>
+
                         </tr>
+
                     </thead>
 
-                    <tbody id="tabla-reservas"> 
+                    <tbody id="tabla-productos">
 
                     </tbody>
+
                 </table>
+
             </section>
         </main>
 
-        <div id="modal-reserva" class="modal">
+                <div id="modal-reserva" class="modal">
             <div class="modal-content">
 
                 <h3>
-                    Nueva Reserva
+                    Nuevo Producto
                 </h3>
 
                 <input
-                    id="cliente"
-                    placeholder="Nombre del cliente"
+                    id="nombre"
+                    placeholder="Nombre del producto"
                 >
-
-                <select id="producto">
-
-                </select>
 
                 <input
-                    id="cantidad"
-                    type="number"
-                    placeholder="Cantidad"  
+                    id="categoria"
+                    placeholder="Categoría"  
                 >
 
-                <button id="guardar-reserva">
+                <input
+                    id="stock"
+                    type="number"
+                    placeholder="Stock"  
+                >
+
+                <input
+                    id="compra"
+                    type="number"
+                    placeholder="Precio Compra"  
+                >
+
+                <input
+                    id="compra"
+                    type="number"
+                    placeholder="Precio Venta"  
+                >
+
+                <button id="guardar-producto">
                     Guardar
                 </button>
             </div>
         </div>
-
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="reservas.js"></script>
+    <script src="productos.js"></script>
 </body>
 </html>
