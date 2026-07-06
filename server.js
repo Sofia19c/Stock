@@ -506,3 +506,28 @@ app.patch(
         }
     }
 );
+
+//Ruta para guardar productos
+app.post(
+    "/productos",
+    async(req, res)=>{
+        try{
+            const nuevoProducto =
+                new Producto(req.body);
+
+            await nuevoProducto.save();
+
+            res.json({
+                mensaje:
+                "Producto guardado"
+            });
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:
+                "Error guardando producto"
+            });
+        }
+    }
+);

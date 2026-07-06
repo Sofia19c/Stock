@@ -23,6 +23,11 @@ new mongoose.Schema({
     precio: {
         type: Number,
         required: true
+    },
+    
+    venta:{
+        type:Number,
+        default:0
     }
 });
 
