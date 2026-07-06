@@ -123,6 +123,74 @@ async function cargarProductos() {
     const productos =
         await respuesta.json();
 
+    const tabla =
+        document.getElementById(
+            "tabla-productos"
+        );
+    tabla.innerHTML = "";
+
+    productos.forEach(
+        producto =>{
+            let estado ="";
+
+            if(
+                Number(producto.cantidad) === 0
+            ){
+                estado =
+                    "🔴 Sin stock";
+            }
+
+            else if(
+                Number(producto.cantidad) < 5
+            ){
+                estado=
+                    "🟠 Poco stock";
+            }
+            else{
+                estado =
+                    " 🟢 En stock";
+            }
+            tabla.innerHTML += `
+
+            <tr>
+                <td>
+                    ${producto.nombre}
+                </td>
+
+                <td>
+                    ${producto.categoria}
+                </td>
+
+                <td>
+                    ${producto.cantidad}
+                </td>
+
+                <td>
+                    $${Number(
+                        producto.precio
+                    ).toLocaleString()}
+                </td>
+
+                <td>
+                    $${Number(
+                        producto.venta
+                    ).toLocaleString()}
+                </td>
+
+                <td>
+                    ${estado}
+                </td>
+
+                <td>
+                    ✏️
+
+                    🗑️
+                </td>
+            </tr>
+            `;
+        }
+    );
+
     console.log(productos);
 }
 
