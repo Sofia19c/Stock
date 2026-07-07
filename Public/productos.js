@@ -1,3 +1,5 @@
+let productoEditando = null;
+
 const botonNuevo =
     document.querySelector(
         ".btn-nuevo"
@@ -88,28 +90,54 @@ async function guardarProducto(){
         return;
     }
 
-    await fetch(
-        "/productos",
-        {
-            method:"POST",
 
-            headers:{
-                "Content-Type":
-                "application/json"
-            },
+    const url =
+        productoEditando
+            ? `/productos/${productoEditando}`
+            : "/productos";
 
-            body:JSON.stringify({
-                nombre, 
-                categoria,
-                cantidad,
-                precio: compra,
-                venta
-            })
-        }
-    );
+    const metodo =
+        productoEditando
+            ? "PUT"
+            : "POST";
+
+    console.log("productoEditando:", productoEditando);
+    console.log("URL:", url);
+
+    //UWU
+    const respuesta = await fetch("http://localhost:3000" + url,{
+        
+    method: metodo,
+    headers:{
+        "Content-Type":"application/json"
+    },
+    body: JSON.stringify({
+        nombre,
+        categoria,
+        cantidad,
+        precio: compra,
+        venta
+        })
+    });
+
+console.log(respuesta.status);
+console.log(respuesta.statusText);
+
+const datos = await respuesta.json();
+alert(JSON.stringify(datos, null, 2));
 
     modal.style.display=
         "none";
+    productoEditando = null;
+    document.getElementById(
+        "guardar-producto"
+    ).textContent =
+        "Guardar";
+    document.getElementById("nombre").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("cantidad").value = "";
+    document.getElementById("compra").value = "";
+    document.getElementById("venta").value = "";
 
     cargarProductos(); 
 }
@@ -182,9 +210,13 @@ async function cargarProductos() {
                 </td>
 
                 <td>
-                    ✏️
+                    <button onclick="editarProducto('${producto._id}')">
+                        ✏️
+                    </button>
 
-                    🗑️
+                    <button onclick="eliminarProducto('${producto._id}')">
+                        🗑️
+                    </button>
                 </td>
             </tr>
             `;
@@ -194,4 +226,83 @@ async function cargarProductos() {
     console.log(productos);
 }
 
+async function eliminarProducto(id) {
+    const confirmar =
+        confirm(
+            "Deseas eliminar este producto?"
+        );
+
+
+        if(!confirmar){
+            return;
+        }
+
+        await fetch(
+             `/productos/${id}`,
+            {
+                method:"DELETE"
+            }
+        );
+
+      cargarProductos()   
+}
+
+async function  editarProducto(id) {
+    console.log("Editar:", id);
+
+    const respuesta =
+        await fetch("/productos");
+
+    const productos = 
+        await respuesta.json();
+
+    const producto =
+        productos.find(
+            p => p._id === id
+        );
+
+    if(!producto){
+        return;
+    
+    }
+
+    productoEditando =id;
+    document.getElementById(
+        "nombre"
+    ).value =
+        producto.nombre;
+
+    document.getElementById(
+        "categoria"
+    ).value =
+        producto.categoria;
+
+    document.getElementById(
+        "cantidad"
+    ).value =
+       producto.cantidad;
+
+    document.getElementById(
+        "compra"
+    ).value =
+        producto.precio;
+
+    document.getElementById(
+       "venta"
+    ).value =
+        producto.venta;
+
+    document.getElementById(
+        "guardar-producto"
+    ).textContent =
+        "Actualizar";
+
+    modal.style.display =
+        "flex";
+
+    console.log("ID del producto:", producto._id);
+}
 cargarProductos();
+
+window.editarProducto = editarProducto;
+window.eliminarProducto = eliminarProducto;

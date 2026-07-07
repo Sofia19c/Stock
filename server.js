@@ -18,7 +18,6 @@ const fs = require("fs");
 //Ayuda a trabajar con rutas de archivos y carpetas.
 const path = require ("path");
 const { json } = require("stream/consumers");
-const producto = require("./models/producto");
 //Crea una aplicación de Express.
 //app será el objeto principal para configurar rutas, middleware y el servidor.
 const app = express();
@@ -32,6 +31,7 @@ mongoose.connect(process.env.MONGO_URI)
 .catch((error) => {
     console.log("Error MongoDB:", error);
 });
+
 
 //Activa un middleware para que Express pueda entender datos en formato JSON.
 //Muy útil cuando el frontend envía información mediante POST, PUT, etc.
@@ -114,7 +114,7 @@ app.get("/productos", async (req, res) => {
 });
 
 //El método HTTP PUT se usa por convención cuando queremos actualizar o modificar datos que ya existen.
-app.put(
+(
     "/productos/:id",
     async (req, res) => {
 
@@ -124,7 +124,7 @@ app.put(
             req.params.id;
 
         const cambio =
-            req.body.cambio;
+            req.bapp.putody.cambio;
 
         const producto =
             await Producto.findById(id);
@@ -325,7 +325,6 @@ app.delete(
 );
 
 app.put(
-
     "/inversiones/:id",
     async (req, res) =>{
         try{
@@ -531,3 +530,69 @@ app.post(
         }
     }
 );
+
+app.delete(
+    "/productos/:id",
+    async(req,res)=>{
+        try{
+            await Producto.findByIdAndDelete(
+                req.params.id
+            );
+
+            res.json({
+                mensaje:
+                "Producto eliminado"
+            });
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:
+                "Error eliminando producto"
+            });
+        }
+    }
+);
+
+app.put("/productos/:id", async (req, res) => {
+
+    console.log("🔥 ENTRE AL PUT 🔥");
+
+    try {
+
+        console.log("ID:", req.params.id);
+        console.log("BODY:", req.body);
+
+        const producto = await Producto.findById(req.params.id);
+
+        console.log("Producto encontrado:", producto);
+
+        if (!producto) {
+            return res.status(404).json({
+                mensaje: "Producto no encontrado"
+            });
+        }
+
+        producto.nombre = req.body.nombre;
+        producto.categoria = req.body.categoria;
+        producto.cantidad = req.body.cantidad;
+        producto.precio = req.body.precio;
+        producto.venta = req.body.venta;
+
+        await producto.save();
+
+        res.json({
+            mensaje: "Producto actualizado"
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: error.message
+        });
+
+    }
+
+});
