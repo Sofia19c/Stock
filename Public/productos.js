@@ -151,6 +151,45 @@ async function cargarProductos() {
     const productos =
         await respuesta.json();
 
+    const totalProductos =
+    productos.length;
+
+    const stockTotal =
+        productos.reduce(
+            (total, producto) =>
+                total + Number(producto.cantidad),
+            0
+        );
+
+    const pocoStock =
+        productos.filter(
+            producto =>
+                Number(producto.cantidad) > 0 &&
+                Number(producto.cantidad) < 5
+        ).length;
+
+    const sinStock =
+        productos.filter(
+            producto =>
+                Number(producto.cantidad) === 0
+        ).length;
+
+        document.getElementById(
+            "total-productos"
+        ).textContent = totalProductos;
+
+        document.getElementById(
+            "stock-total"
+        ).textContent = stockTotal;
+
+        document.getElementById(
+            "poco-stock"
+        ).textContent = pocoStock;
+
+        document.getElementById(
+            "sin-stock"
+        ).textContent = sinStock;
+
     const tabla =
         document.getElementById(
             "tabla-productos"
