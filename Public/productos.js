@@ -157,7 +157,19 @@ async function cargarProductos() {
         );
     tabla.innerHTML = "";
 
-    productos.forEach(
+    const textoBusqueda =
+        document
+            .getElementById("busqueda")
+            .value
+            .toLowerCase();
+        
+    productos.filter(
+        producto =>
+            producto.nombre
+                .toLowerCase()
+                .includes(textoBusqueda)
+    )
+    .forEach(
         producto =>{
             let estado ="";
 
@@ -302,6 +314,14 @@ async function  editarProducto(id) {
 
     console.log("ID del producto:", producto._id);
 }
+
+document
+.getElementById("busqueda")
+.addEventListener(
+    "input",
+    cargarProductos
+);
+
 cargarProductos();
 
 window.editarProducto = editarProducto;

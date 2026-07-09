@@ -65,3 +65,61 @@
 .sidebar li{
     cursor:pointer;
 }
+
+.barra-herramientas{
+    display:flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+}
+
+.tabla-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    padding:0 10px;
+
+}
+
+.tabla-header h3{
+
+    margin:0;
+
+    color:#1f2937;
+
+    font-size:24px;
+
+}
+
+#busqueda{
+
+    width:320px;
+
+    padding:12px 18px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#f5f7fb;
+
+    font-size:15px;
+
+    outline:none;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+#busqueda:focus{
+
+    border:2px solid #4f46e5;
+
+    background:white;
+
+}
