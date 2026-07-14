@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- idioma  -->
+<HEAD>
+    <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
+    <!--Conecta este archivo HTML con el archivo css-->
+    <link rel="stylesheet" href="style.css">
+    <link rel ="stylesheet" href="inversiones.css">
+    <link rel ="stylesheet" href="reservas.css">
+    <link rel ="stylesheet" href="productos.css">
+    <link rel ="stylesheet" href="reportes.css">
+</HEAD>
+<body>
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                📦 Inventario 
+            </div>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            🏠 Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.html">
+                            📦 Productos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reservas.html">
+                            📅 Reservas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inversiones.html">
+                            💰 Inversiones
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reportes.html">
+                            📊 Reportes
+                        </a>
+                    </li>
+                    <li>⚙ Configuración</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+        <header>
+            <h1>
+                📄 Reportes
+            </h1>
+        </header>
+
+        <!-- Tarjetas -->
+        <section class="dashboard">
+            <div class="card">
+                <h3>
+                    💰 Valor Inventario
+                </h3>
+
+                <p id="valor-inventario">
+                    $0
+                </p>
+
+            </div>
+
+            <div class="card">
+                <h3>
+                    📦 Productos
+                </h3>
+                <p id="total-productos">
+                    0
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>
+                    📅 Reservas
+                </h3>
+
+                <p id="total-reservas">
+                    0
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>
+                    💵 Total Invertido
+                </h3>
+
+                <p id="total-invertido">
+                    $0
+                </p>
+            </div>
+        </section>
+
+        <!-- Graficas -->
+        <section class="graficas-grid">
+            <div class="grafica-panel">
+                <h3>
+                    Inventario por Categoría
+                </h3>
+                <!--canvas es un contenedor para graficas interactivas-->
+                <canvas id="graficaCategorias"></canvas>
+
+            </div>
+
+            <div class="grafica-panel">
+                <h3>
+                    Estado del Inventario
+                </h3>
+                <canvas id="graficaStock"></canvas>
+            </div>
+        </section>
+
+        <!-- Reportes -->
+        <section class="tabla-reportes">
+            <h2>
+                Reportes Disponibles
+            </h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            Reporte
+                        </th>
+                        <th>
+                            Acción
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            Inventario Completo
+                        </td>
+
+                        <td>
+                            <button>
+                                📥 Descargar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Productos con Poco Stock
+                        </td>
+
+                        <td>
+                            <button>
+                                📥 Descargar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Reservas
+                        </td>
+
+                        <td>
+                            <button>
+                                📥 Descargar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            Inversiones
+                        </td>
+
+                        <td>
+                            <button>
+                                📥 Descargar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="reportes.js"></script>
+
+</body>
+</html>
