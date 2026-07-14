@@ -201,13 +201,29 @@ async function cargarProductos() {
             .getElementById("busqueda")
             .value
             .toLowerCase();
+
+    const categoriaSeleccionada =
+        document    
+            .getElementById("filtro-categoria")
+            .value;
         
     productos.filter(
-        producto =>
-            producto.nombre
-                .toLowerCase()
-                .includes(textoBusqueda)
+        producto => {
+            const coincideNombre =
+                producto.nombre
+                    .toLowerCase()
+                    .includes(textoBusqueda);
+
+            const coincideCategoria =
+                categoriaSeleccionada === "" || 
+                producto.categoria === categoriaSeleccionada;
+                
+            return(
+                coincideNombre && coincideCategoria
+            );
+        }      
     )
+
     .forEach(
         producto =>{
             let estado ="";
@@ -360,6 +376,13 @@ document
     "input",
     cargarProductos
 );
+
+document
+.getElementById("filtro-categoria")
+.addEventListener(
+    "change",
+    cargarProductos
+)
 
 cargarProductos();
 
