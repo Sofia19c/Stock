@@ -101,15 +101,15 @@
 #busqueda,
 #filtro-categoria{
 
-    padding:12px 18px;
+    padding:14px 120px;
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
     background:#f5f7fb;
 
-    font-size:15px;
+    font-size:16px;
 
     outline:none;
 
@@ -118,9 +118,18 @@
 }
 
 #busqueda{
-    width:300px;
+    width:420px;
+
+    height:48px;
+
+    font-size:16px;
 }
 
 #filtro-categoria{
-    width:220px;
+    width:420px;
+
+    height:48px;
+
+    font-size:16px;
+
 }
