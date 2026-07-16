@@ -18,6 +18,7 @@ const fs = require("fs");
 //Ayuda a trabajar con rutas de archivos y carpetas.
 const path = require ("path");
 const { json } = require("stream/consumers");
+const producto = require("./models/producto");
 //Crea una aplicación de Express.
 //app será el objeto principal para configurar rutas, middleware y el servidor.
 const app = express();
@@ -591,6 +592,179 @@ app.put("/productos/:id", async (req, res) => {
 
         res.status(500).json({
             mensaje: error.message
+        });
+
+    }
+
+});
+
+app.get("/reportes/inventario", async(req,res) =>{
+    try{
+        const productos = 
+            await Producto.find();
+        
+        const workbook =
+            new ExcelJS.Workbook();
+
+        const hoja =
+            workbook.addWorksheet("Inventario");
+
+        hoja.columns = [
+            {
+                header: "Producto",
+                key: "nombre",
+                width: 30
+            },
+
+            {
+                header: "Categoria",
+                key: "categoria",
+                width: 20
+            },
+
+            { 
+                header: "Cantidad",
+                key: "cantidad",
+                width: 15
+            },
+
+            {
+                header: "Precio Compra",
+                key: "precio",
+                width: 20
+            },
+
+            {
+                header: "Precio Venta",
+                key: "venta",
+                width: 20
+            }
+        ];
+
+        productos.forEach(productos =>{
+            hoja.addRow({
+                nombre: producto.nombre,
+                categoria: producto.categoria,
+                cantidad: producto.cantidad,
+                venta: producto.venta
+            });
+        });
+
+        const archivo = "Inventario.xlsx";
+        //este metodo sive para definir el formato de los datos
+        res.setHeader(
+            "content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+
+        res.setHeader(
+            "content-Disposiion",
+            `attachment; filename= "${archivo}"`
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+    }
+
+    catch(error){
+        console.log(error);
+        res.status(500).json({
+            mensaje: "Error generando reporte"
+        });
+    }
+});
+
+app.get("/reportes/poco-stock", async (req, res) =>{
+
+    try{
+        const productos = await Producto.find({
+            cantidad:{ $gt: 0, $lt: 5}
+        });
+
+        const Workbook = new ExcelJS.Workbook();
+        const hoja = workbook.addWorksheet("Poco Stock");
+
+        hoja.columns = [
+            {header: "Producto", key: "nombre", width: 30},
+            {header: "Categoria", key: "categoria", width: 20},
+            {header: "Cantidad", key: "cantidad", width: 15 }
+        ];
+
+        productos.forEach(p =>{
+            hoja.addRow({
+                nombre: p.nombre,
+                categoria: p.categoria,
+                cantidad: p.cantidad
+            });
+        });
+
+        res.setHeader(
+            "Content-type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        ),
+
+         res.setHeader(
+            "Content-Disposition",
+            'attachment; filename="PocoStock.xlsx"'
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+
+    } catch(error) {
+
+        console.log(error);
+        res.status(500).json({
+            mensaje: "Error generando reporte"
+        });
+
+        
+    }
+});
+
+app.get("/reportes/inversiones", async (req, res) => {
+
+    try {
+
+        const inversiones = await Inversion.find();
+
+        const workbook = new ExcelJS.Workbook();
+        const hoja = workbook.addWorksheet("Inversiones");
+
+        hoja.columns = [
+            { header: "Producto", key: "producto", width: 30 },
+            { header: "Cantidad", key: "cantidad", width: 15 },
+            { header: "Precio Compra", key: "precioCompra", width: 20 },
+            { header: "Precio Venta", key: "precioVenta", width: 20 }
+        ];
+
+        inversiones.forEach(i => {
+            hoja.addRow({
+                producto: i.producto,
+                cantidad: i.cantidad,
+                precioCompra: i.precioCompra,
+                precioVenta: i.precioVenta
+            });
+        });
+
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+
+        res.setHeader(
+            "Content-Disposition",
+            'attachment; filename="Inversiones.xlsx"'
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+
+    } catch(error) {
+
+        console.log(error);
+        res.status(500).json({
+            mensaje: "Error generando reporte"
         });
 
     }
