@@ -681,7 +681,7 @@ app.get("/reportes/poco-stock", async (req, res) =>{
             cantidad:{ $gt: 0, $lt: 5}
         });
 
-        const Workbook = new ExcelJS.Workbook();
+        const workbook = new ExcelJS.Workbook();
         const hoja = workbook.addWorksheet("Poco Stock");
 
         hoja.columns = [
@@ -699,7 +699,7 @@ app.get("/reportes/poco-stock", async (req, res) =>{
         });
 
         res.setHeader(
-            "Content-type",
+            "Content-Type",
             "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         ),
 
@@ -720,6 +720,55 @@ app.get("/reportes/poco-stock", async (req, res) =>{
 
         
     }
+});
+
+app.get("/reportes/reservas", async (req, res) => {
+
+    try {
+
+        const reservas = await Reserva.find();
+
+        const workbook = new ExcelJS.Workbook();
+        const hoja = workbook.addWorksheet("Reservas");
+
+        hoja.columns = [
+            { header: "Cliente", key: "cliente", width: 25 },
+            { header: "Producto", key: "producto", width: 25 },
+            { header: "Cantidad", key: "cantidad", width: 15 },
+            { header: "Estado", key: "estado", width: 20 }
+        ];
+
+        reservas.forEach(r => {
+            hoja.addRow({
+                cliente: r.cliente,
+                producto: r.producto,
+                cantidad: r.cantidad,
+                estado: r.estado
+            });
+        });
+
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+
+        res.setHeader(
+            "Content-Disposition",
+            'attachment; filename="Reservas.xlsx"'
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+
+    } catch(error) {
+
+        console.log(error);
+        res.status(500).json({
+            mensaje: "Error generando reporte"
+        });
+
+    }
+
 });
 
 app.get("/reportes/inversiones", async (req, res) => {
