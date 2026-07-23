@@ -819,3 +819,117 @@ app.get("/reportes/inversiones", async (req, res) => {
     }
 
 });
+
+app.get("/reportes/resumen", async (req, res) => {
+
+    try {
+
+        const productos =
+            await Producto.find();
+
+        const reservas =
+            await Reserva.find();
+
+        const inversiones =
+            await Inversion.find();
+
+        const valorInventario =
+            productos.reduce(
+                (total, producto) =>
+                    total +
+                    (
+                        Number(producto.precio) *
+                        Number(producto.cantidad)
+                    ),
+                0
+            );
+
+        const totalInvertido =
+            inversiones.reduce(
+                (total, inversion) =>
+                    total +
+                    Number(inversion.invertido),
+                0
+            );
+
+        res.json({
+            valorInventario,
+            totalProductos: productos.length,
+            totalReservas: reservas.length,
+            totalInvertido
+        });
+
+    } catch (error) {
+
+        console.log(error);
+
+        res.status(500).json({
+            mensaje: "Error obteniendo resumen"
+        });
+
+    }
+
+});
+
+app.get("/reportes/graficas", async (req, res) =>{
+
+    //consulta de bases de datos 
+    try{
+
+        //Consulta la base de datos para traer todos los registros de la colección de productos.
+        const productos =
+            await Producto.find();
+
+        //Crea un objeto vacío llamado categorias donde se agrupará el stock total sumado por cada categoría
+        const categorias = {};
+
+        //Inicializa tres contadores numéricos en 0 para clasificar los productos según su disponibilidad.
+        let enStock = 0;
+        let pocoStock = 0;
+        let sinStock = 0;
+
+        productos.forEach(producto => {
+        //recorre el bucle 
+
+            //Categorias
+            //Verifica si la categoría del producto actual aún no existe como clave dentro del objeto categorias. Si no existe, la inicializa en 0.
+            if(!categorias[producto.categoria]){
+                categorias[producto.categoria] = 0;
+            }
+
+            //Le suma al acumulador de esa categoría la cantidad del producto actual. Se usa Number(...) para asegurar que el valor sea numérico
+            // y evitar concatenaciones de texto.
+            categorias[producto.categoria] += 
+                Number(producto.cantidad);
+
+            //Calsificación segun el estado del stock
+            if(producto.cantidad === 0){
+                sinStock++;
+            }
+            else if(producto.cantidad < 5){
+                pocoStock++;
+            }
+            else{
+                enStock++;
+            }
+        });
+
+        // Envía una respuesta al cliente en formato JSON con código de estado HTTP 200 (OK).
+        res.json({
+            categorias,
+
+            estado:{
+                enStock,
+                pocoStock,
+                sinStock
+            }
+        });
+    }
+    catch (error){
+        console.log(error);
+
+        res.status(500).json({
+            mensaje:"Error cargando gráficas"
+        });
+    }
+});
