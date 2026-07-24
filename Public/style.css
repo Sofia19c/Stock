@@ -502,3 +502,29 @@ select{
 .toast-warning{
     background:#F59E0B;
 }
+
+/* ==========================
+   Transiciones globales
+========================== */
+
+body,
+.card,
+.config-card,
+.sidebar,
+button,
+input,
+select,
+.contenido,
+.grafica-panel,
+.tabla-productos,
+.tabla-reportes,
+.tabla-reservas,
+.tabla-inversiones{
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
+}
