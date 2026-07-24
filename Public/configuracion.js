@@ -10,50 +10,76 @@ botonGuardar.addEventListener(
 
 cargarConfiguracion();
 
-function guardarConfiguracion(){
-    const configuracion = {
-        nombre:
-            document.getElementById(
-                "nombre-negocio"
-            ).value,
+async function guardarConfiguracion(){
 
-        propietario:
-            document.getElementById(
-                "propietario"
-            ).value,
+    const respuesta =
+        await fetch(
+            "/configuraciones",
+            {
 
-        telefono:
-            document.getElementById(
-                "telefono"
-            ).value,
+                method:"PUT",
 
-        correo:
-            document.getElementById(
-                "correo"
-            ).value
-    };
+                headers:{
+                    "Content-Type":"application/json"
+                },
 
-    localStorage.setItem(
-        "configuracion",
-        JSON.stringify(configuracion)
-    );
+                body:JSON.stringify({
 
-    mostrarToast(
-        "configuracion guardada correctamente",
-        "sucess"
-    );
-}
+                    nombre:
+                        document.getElementById(
+                            "nombre-negocio"
+                        ).value,
 
-function cargarConfiguracion(){
+                    propietario:
+                        document.getElementById(
+                            "propietario"
+                        ).value,
 
-    const datos =
-        JSON.parse(
-            localStorage.getItem("configuracion")
+                    telefono:
+                        document.getElementById(
+                            "telefono"
+                        ).value,
+
+                    correo:
+                        document.getElementById(
+                            "correo"
+                        ).value
+
+                })
+
+            }
         );
 
-    if(!datos){
-        return;
+    const datos =
+        await respuesta.json();
+
+    if(respuesta.ok){
+
+        mostrarToast(
+            "Configuración guardada correctamente",
+            "success"
+        );
+
     }
+
+    else{
+
+        mostrarToast(
+            datos.mensaje,
+            "error"
+        );
+
+    }
+
+}
+
+async function cargarConfiguracion(){
+
+    const respuesta =
+        await fetch("/configuraciones");
+    
+    const configuracion =
+        await respuesta.json();
 
     document.getElementById(
         "nombre-negocio"
@@ -107,3 +133,5 @@ function mostrarToast(mensaje,tipo="success"){
     },2500);
 
 }
+
+cargarConfiguracion();

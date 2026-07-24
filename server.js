@@ -6,6 +6,8 @@ const Inversion = require("./models/inversion");
 const Producto = require("./models/producto");
 
 const Reserva = require("./models/reserva");
+
+const Configuracion = require("./models/configuraciones");
 //Importa la librería Express, que sirve para crear servidores web y APIs
 const { error } = require("console");
 const express = require("express");
@@ -933,3 +935,66 @@ app.get("/reportes/graficas", async (req, res) =>{
         });
     }
 });
+
+app.get(
+    "/configuraciones",
+    async(req,res)=>{
+        try{
+            let configuracion =
+                await Configuracion.findOne();
+            
+            if(!configuracion){
+                configuracion =
+                    await Configuracion.create({});
+            }
+
+            res.json(configuracion);
+
+        }catch(error){
+            console.log(error);
+            res.status(500).json({
+                mensaje:"Error cargando configuración"
+            });
+        }
+    }
+);
+
+app.put(
+    "/configuraciones",
+    async(req, res)=>{
+        try{
+            let configuracion =
+                await Configuracion.findOne();
+
+            if(!configuracion){
+                configuracion =
+                    new Configuracion();
+            }
+
+            configuracion.nombre =
+                req.body.nombre;
+            
+            configuracion.propietario =
+                req.body.propietario;
+            
+            configuracion.telefono =
+                req.body.telefono;
+
+            configuracion.correo =
+                req.body.correo;
+            
+            await configuracion.save();
+
+            res.json({
+                mensaje:"Configuracion actualizada"
+            });
+        }catch(error){
+            console.log(error);
+
+            res.status(500).json({
+                mensaje:"Error actualizando configuracion"
+            });
+        }
+
+    }
+);
