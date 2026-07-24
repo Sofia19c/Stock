@@ -998,3 +998,139 @@ app.put(
 
     }
 );
+
+app.get("/backup/exportar", async (req, res) => {
+    try{
+        const productos =
+            await Producto.find();
+
+         const reservas =
+            await Reserva.find();
+
+        const inversiones =
+            await Inversion.find();
+
+        const configuracion =
+            await Configuracion.findOne();
+
+        const backup = {
+
+            fecha:
+                new Date(),
+
+            productos,
+            reservas,
+            inversiones,
+            configuracion
+        };
+
+
+        res.setHeader(
+            "Content-Type",
+            "application/json"
+        );
+
+        res.setHeader(
+            "Content-Disposition",
+            'attachment; filename="backup.json"'
+        );
+        
+        res.send(
+            JSON.stringify(
+                backup,
+                null,
+                2
+            )
+        );
+    }catch(error){
+        console.log(error);
+
+        res.status(500).json({
+            mensaje:"Error exportando respaldo"
+        })
+    }
+});
+
+app.post("/backup/restaurar", async(req,res)=>{
+
+    try{
+
+    const backup =
+        req.body;
+
+    console.log(backup);
+
+    }catch(error){
+
+        console.log(error);
+
+        res.status(500).json({
+            mensaje:"Error restaurando respaldo"
+        });
+
+    }
+    try{
+
+        const backup =
+            req.body;
+
+        await Producto.deleteMany({});
+        await Reserva.deleteMany({});
+        await Inversion.deleteMany({});
+        await Configuracion.deleteMany({});
+
+        if(backup.productos?.length){
+
+            await Producto.insertMany(
+                backup.productos
+            );
+
+        }
+
+        if(backup.reservas?.length){
+
+            await Reserva.insertMany(
+                backup.reservas
+            );
+
+        }
+
+        if(backup.inversiones?.length){
+
+            await Inversion.insertMany(
+                backup.inversiones
+            );
+
+        }
+
+        if(backup.configuracion){
+
+            await Configuracion.create(
+                backup.configuracion
+            );
+
+        }
+
+        res.json({
+
+            mensaje:
+                "Respaldo restaurado correctamente"
+
+        });
+
+    }
+
+    catch(error){
+
+        console.log(error);
+
+        res.status(500).json({
+
+            mensaje:
+                "Error restaurando respaldo"
+
+        });
+
+    }
+
+});

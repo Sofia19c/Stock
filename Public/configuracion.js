@@ -50,7 +50,7 @@ async function guardarConfiguracion(){
             }
         );
 
-    const datos =
+    const configuracion =
         await respuesta.json();
 
     if(respuesta.ok){
@@ -65,7 +65,7 @@ async function guardarConfiguracion(){
     else{
 
         mostrarToast(
-            datos.mensaje,
+            configuracion.mensaje,
             "error"
         );
 
@@ -84,22 +84,22 @@ async function cargarConfiguracion(){
     document.getElementById(
         "nombre-negocio"
     ).value =
-        datos.nombre || "";
+        configuracion.nombre || "";
 
     document.getElementById(
         "propietario"
     ).value =
-        datos.propietario || "";
+        configuracion.propietario || "";
 
     document.getElementById(
         "telefono"
     ).value =
-        datos.telefono || "";
+        configuracion.telefono || "";
 
     document.getElementById(
         "correo"
     ).value =
-        datos.correo || "";
+        configuracion.correo || "";
 
 }
 
@@ -134,4 +134,77 @@ function mostrarToast(mensaje,tipo="success"){
 
 }
 
+document
+    .getElementById("exportar")
+    .addEventListener(
+        "click",
+        exportarBackup
+    );
+function exportarBackup(){
+
+    window.location.href =
+        "/backup/exportar";
+
+}
+
+document
+    .getElementById("importar")
+    .addEventListener(
+        "click",
+        ()=>{
+
+            document
+                .getElementById(
+                    "archivo-backup"
+                )
+                .click();
+
+        }
+    );
+document
+    .getElementById("archivo-backup")
+    .addEventListener(
+        "change",
+        leerBackup
+    );
+
+async function leerBackup(e){
+
+    const archivo =
+        e.target.files[0];
+
+    if(!archivo){
+        return;
+    }
+
+    const texto =
+        await archivo.text();
+
+    const backup =
+        JSON.parse(texto);
+
+    const respuesta =
+    await fetch(
+        "/backup/restaurar",
+        {
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify(
+                backup
+            )
+
+        }
+    );
+
+const datos =
+    await respuesta.json();
+
+console.log(datos);
+
+}
 cargarConfiguracion();
