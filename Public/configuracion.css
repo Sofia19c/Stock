@@ -1,0 +1,153 @@
+/* ===========================
+   CONFIGURACIÓN
+=========================== */
+
+.config-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:30px;
+
+    margin-top:30px;
+
+}
+
+/* Tarjetas */
+
+.config-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.config-card h2{
+
+    margin-bottom:25px;
+
+    color:#4F46E5;
+
+    font-size:22px;
+
+}
+
+/* Formularios */
+
+.config-card label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:8px;
+
+    font-weight:600;
+
+    color:#444;
+
+}
+
+.config-card input{
+
+    width:100%;
+
+    padding:12px 15px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.3s;
+
+    box-sizing:border-box;
+
+}
+
+.config-card input:focus{
+
+    outline:none;
+
+    border-color:#4F46E5;
+
+    box-shadow:0 0 0 3px rgba(79,70,229,.15);
+
+}
+
+/* Botones */
+
+.config-card button{
+
+    margin-top:25px;
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#4F46E5;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.config-card button:hover{
+
+    background:#4338CA;
+
+    transform:translateY(-2px);
+
+}
+
+.config-card button:disabled{
+
+    background:#BDBDBD;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+/* Información */
+
+.config-card p{
+
+    margin:12px 0;
+
+    color:#555;
+
+    line-height:1.6;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+    .config-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}

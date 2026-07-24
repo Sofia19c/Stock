@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es"> <!-- idioma  -->
+<HEAD>
+    <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
+    <!--Conecta este archivo HTML con el archivo css-->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="inversiones.css">
+    <link rel="stylesheet" href="reservas.css">
+    <link rel="stylesheet" href="productos.css">
+    <link rel="stylesheet" href="reportes.css">
+    <link rel="stylesheet" href="configuracion.css">
+</HEAD>
+<body>
+    <div class="layout">
+
+        <aside class="sidebar">
+
+            <div class="logo">
+                📦 Inventario  
+            </div>
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="index.html">
+                            🏠 Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <a href="productos.html">
+                            📦 Productos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reservas.html">
+                            📅 Reservas
+                        </a>
+                    </li>
+                    <li>
+                        <a href="inversiones.html">
+                            💰 Inversiones
+                        </a>
+                    </li>
+                    <li>
+                        <a href="reportes.html">
+                            📊 Reportes
+                        </a>
+                    </li>
+                    <li>
+                        <a href="configuracion.html">
+                            ⚙ Configuración
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+        </aside>
+        <main class="contenido">
+
+        <header>
+            <h1>
+                ⚙ Configuración
+            </h1>
+        </header>
+
+        <section class="config-grid">
+
+            <!-- Información del negocio -->
+            <div class="config-card">
+
+                <h2>
+                    🏪 Información del negocio
+                </h2>
+
+                <label>
+                    Nombre del negocio
+                </label>
+
+                <input
+                    id="nombre-negocio"
+                    type="text"
+                    placeholder="Inventario Pro"
+                >
+
+                <label>
+                    Propietario
+                </label>
+
+                <input
+                    id="propietario"
+                    type="text"
+                    placeholder="Nombre del propietario"
+                >
+
+                <label>
+                    Teléfono
+                </label>
+
+                <input
+                    id="telefono"
+                    type="text"
+                    placeholder="3001234567"
+                >
+
+                <label>
+                    Correo
+                </label>
+
+                <input
+                    id="correo"
+                    type="email"
+                    placeholder="correo@ejemplo.com"
+                >
+
+                <button id="guardar-configuracion">
+                    💾 Guardar cambios
+                </button>
+
+            </div>
+
+            <!-- Apariencia -->
+            <div class="config-card">
+
+                <h2>
+                    🎨 Apariencia
+                </h2>
+
+                <p>
+                    Próximamente podrás cambiar el tema del sistema.
+                </p>
+
+                <button disabled>
+                    🌙 Modo Oscuro
+                </button>
+
+            </div>
+
+            <!-- Base de datos -->
+            <div class="config-card">
+
+                <h2>
+                    💾 Base de datos
+                </h2>
+
+                <button id="exportar">
+                    📤 Exportar respaldo
+                </button>
+
+                <button id="importar">
+                    📥 Restaurar respaldo
+                </button>
+
+            </div>
+
+            <!-- Información -->
+            <div class="config-card">
+
+                <h2>
+                    Información
+                </h2>
+
+                <p><strong>Aplicación:</strong> Inventario Pro</p>
+
+                <p><strong>Versión:</strong> 1.0</p>
+
+                <p><strong>Estado:</strong> En desarrollo</p>
+
+            </div>
+
+        </section>
+
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="configuracion.js"></script>
+    <div id="toast"></div>
+</body>
+</html>
