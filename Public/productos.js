@@ -83,10 +83,11 @@ async function guardarProducto(){
         !nombre ||
         !categoria
     ){
-        alert(
-            "Completa todos los campos"
+        mostrarToast(
+        "Completa todos los campos",
+        "warning"
         );
-
+        
         return;
     }
 
@@ -104,27 +105,46 @@ async function guardarProducto(){
     console.log("productoEditando:", productoEditando);
     console.log("URL:", url);
 
-    //UWU
-    const respuesta = await fetch("http://localhost:3000" + url,{
-        
-    method: metodo,
-    headers:{
-        "Content-Type":"application/json"
-    },
-    body: JSON.stringify({
-        nombre,
-        categoria,
-        cantidad,
-        precio: compra,
-        venta
-        })
-    });
+   // Enviar datos al servidor
+const respuesta = await fetch(
+    "http://localhost:3000" + url,
+    {
+        method: metodo,
 
-console.log(respuesta.status);
-console.log(respuesta.statusText);
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body: JSON.stringify({
+            nombre,
+            categoria,
+            cantidad,
+            precio: compra,
+            venta
+        })
+    }
+);
 
 const datos = await respuesta.json();
-alert(JSON.stringify(datos, null, 2));
+
+if(respuesta.ok){
+
+    mostrarToast(
+        productoEditando
+            ? "✅ Producto actualizado correctamente"
+            : "✅ Producto agregado correctamente",
+        "success"
+    );
+
+}else{
+
+    mostrarToast(
+        datos.mensaje || "❌ Ocurrió un error",
+        "error"
+    );
+
+    return;
+}
 
     modal.style.display=
         "none";
@@ -293,25 +313,40 @@ async function cargarProductos() {
     console.log(productos);
 }
 
-async function eliminarProducto(id) {
+async function eliminarProducto(id){
+
     const confirmar =
-        confirm(
-            "Deseas eliminar este producto?"
-        );
+        confirm("¿Deseas eliminar este producto?");
 
+    if(!confirmar){
+        return;
+    }
 
-        if(!confirmar){
-            return;
+    const respuesta = await fetch(
+        `/productos/${id}`,
+        {
+            method:"DELETE"
         }
+    );
 
-        await fetch(
-             `/productos/${id}`,
-            {
-                method:"DELETE"
-            }
+    if(respuesta.ok){
+
+        mostrarToast(
+            "🗑️ Producto eliminado correctamente",
+            "success"
         );
 
-      cargarProductos()   
+    }else{
+
+        mostrarToast(
+            "❌ Error al eliminar el producto",
+            "error"
+        );
+
+    }
+
+    cargarProductos();
+
 }
 
 async function  editarProducto(id) {
@@ -383,6 +418,37 @@ document
     "change",
     cargarProductos
 )
+
+function mostrarToast(mensaje, tipo="success"){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = mensaje;
+
+    toast.className = "";
+
+    toast.classList.add("mostrar");
+
+    if(tipo==="success"){
+        toast.classList.add("toast-success");
+    }
+
+    if(tipo==="error"){
+        toast.classList.add("toast-error");
+    }
+
+    if(tipo==="warning"){
+        toast.classList.add("toast-warning");
+    }
+
+    setTimeout(()=>{
+
+        toast.classList.remove("mostrar");
+
+    },2500);
+
+}
 
 cargarProductos();
 
