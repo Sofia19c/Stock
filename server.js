@@ -982,6 +982,9 @@ app.put(
 
             configuracion.correo =
                 req.body.correo;
+
+            configuracion.tema =
+                req.body.tema;
             
             await configuracion.save();
 
@@ -1070,15 +1073,16 @@ app.post("/backup/restaurar", async(req,res)=>{
 
     }
     try{
-
         const backup =
             req.body;
 
+        // Limpiar colecciones
         await Producto.deleteMany({});
         await Reserva.deleteMany({});
         await Inversion.deleteMany({});
         await Configuracion.deleteMany({});
 
+        // Restaurar productos
         if(backup.productos?.length){
 
             await Producto.insertMany(
@@ -1087,6 +1091,7 @@ app.post("/backup/restaurar", async(req,res)=>{
 
         }
 
+        // Restaurar reservas
         if(backup.reservas?.length){
 
             await Reserva.insertMany(
@@ -1095,6 +1100,7 @@ app.post("/backup/restaurar", async(req,res)=>{
 
         }
 
+        // Restaurar inversiones
         if(backup.inversiones?.length){
 
             await Inversion.insertMany(
@@ -1103,6 +1109,7 @@ app.post("/backup/restaurar", async(req,res)=>{
 
         }
 
+        // Restaurar configuración
         if(backup.configuracion){
 
             await Configuracion.create(

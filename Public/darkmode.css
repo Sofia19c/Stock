@@ -1,0 +1,131 @@
+/* ===========================
+   MODO OSCURO
+=========================== */
+
+body.dark{
+
+    background:#0f172a !important;
+    color:#f8fafc;
+}
+
+/* Sidebar */
+
+body.dark .sidebar{
+
+    background:#020617;
+}
+
+body.dark .sidebar a{
+
+    color:#e2e8f0;
+}
+
+body.dark .logo{
+
+    color:white;
+}
+
+/* Contenido */
+
+body.dark .contenido{
+
+    background:#0f172a;
+}
+
+/* Tarjetas */
+
+body.dark .card,
+body.dark .grafica-panel,
+body.dark .tabla-productos,
+body.dark .tabla-reservas,
+body.dark .tabla-inversiones,
+body.dark .tabla-reportes,
+body.dark .config-card{
+
+    background:#1e293b;
+    color:white;
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+}
+
+/* Títulos */
+
+body.dark h1,
+body.dark h2,
+body.dark h3{
+
+    color:white;
+}
+
+/* Texto */
+
+body.dark p,
+body.dark span,
+body.dark label,
+body.dark td{
+
+    color:#e2e8f0;
+}
+
+/* Inputs */
+
+body.dark input,
+body.dark select,
+body.dark textarea{
+
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+}
+
+/* Placeholder */
+
+body.dark input::placeholder{
+
+    color:#cbd5e1;
+}
+
+/* Tablas */
+
+body.dark table{
+
+    background:#1e293b;
+}
+
+body.dark th{
+
+    background:#4f46e5;
+    color:white;
+}
+
+body.dark tr{
+
+    border-color:#334155;
+}
+
+/* Botones */
+
+body.dark button{
+
+    transition:.25s;
+}
+
+body.dark button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* Cards Dashboard */
+
+body.dark .dashboard .card{
+
+    background:#1e293b;
+}
+
+/* Header */
+
+body.dark header{
+
+    color:white;
+}

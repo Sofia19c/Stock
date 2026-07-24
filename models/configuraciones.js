@@ -21,8 +21,12 @@ new mongoose.Schema({
     correo:{
         type:String,
         default:""
-    }
+    },
 
+    tema:{
+        type:String,
+        default:"claro"
+    }
 });
 
 module.exports =

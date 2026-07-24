@@ -43,33 +43,19 @@ async function guardarConfiguracion(){
                     correo:
                         document.getElementById(
                             "correo"
+                        ).value,
+
+                    tema:
+                        document.getElementById(
+                            "tema"
                         ).value
 
                 })
 
             }
         );
-
-    const configuracion =
-        await respuesta.json();
-
-    if(respuesta.ok){
-
-        mostrarToast(
-            "Configuración guardada correctamente",
-            "success"
-        );
-
-    }
-
-    else{
-
-        mostrarToast(
-            configuracion.mensaje,
-            "error"
-        );
-
-    }
+    
+    await aplicarTema();
 
 }
 
@@ -100,7 +86,21 @@ async function cargarConfiguracion(){
         "correo"
     ).value =
         configuracion.correo || "";
+    
+    document.getElementById(
+        "tema"
+    ).value =
+        configuracion.tema;
 
+    if(configuracion.tema === "oscuro"){
+
+    document.body.classList.add("dark");
+
+    }else{
+
+        document.body.classList.remove("dark");
+
+    }
 }
 
 function mostrarToast(mensaje,tipo="success"){

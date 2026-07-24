@@ -4,11 +4,8 @@
     <meta charset="UTF-8"> <!--permite usar caracteres especiales-->
     <!--Conecta este archivo HTML con el archivo css-->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="inversiones.css">
-    <link rel="stylesheet" href="reservas.css">
-    <link rel="stylesheet" href="productos.css">
-    <link rel="stylesheet" href="reportes.css">
     <link rel="stylesheet" href="configuracion.css">
+    <link rel="stylesheet" href="darkmode.css">
 </HEAD>
 <body>
     <div class="layout">
@@ -118,6 +115,26 @@
 
             </div>
 
+            <div class="campo">
+
+                <label>
+                    Tema
+                </label>
+
+                <select id="tema">
+
+                    <option value="claro">
+                        ☀️ Claro
+                    </option>
+
+                    <option value="oscuro">
+                        🌙 Oscuro
+                    </option>
+
+                </select>
+
+            </div>
+
             <!-- Apariencia -->
             <div class="config-card">
 
@@ -179,6 +196,7 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="tema.js"></script>
     <script src="configuracion.js"></script>
     <div id="toast"></div>
 </body>
