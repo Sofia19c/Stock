@@ -1,113 +1,230 @@
-/* ===========================
-   MODO OSCURO
-=========================== */
+/* =====================================================
+   MODO OSCURO - INVENTARIO PRO
+===================================================== */
 
 body.dark{
 
     background:#0f172a !important;
     color:#f8fafc;
+
 }
 
-/* Sidebar */
+/* ==========================
+   SIDEBAR
+========================== */
 
 body.dark .sidebar{
 
     background:#020617;
-}
 
-body.dark .sidebar a{
-
-    color:#e2e8f0;
 }
 
 body.dark .logo{
 
     color:white;
+
 }
 
-/* Contenido */
+body.dark .sidebar a{
+
+    color:#e2e8f0;
+
+}
+
+body.dark .sidebar li:hover{
+
+    background:#1e293b;
+
+}
+
+/* ==========================
+   CONTENIDO
+========================== */
 
 body.dark .contenido{
 
     background:#0f172a;
+
 }
 
-/* Tarjetas */
+/* ==========================
+   NAVBAR
+========================== */
+
+body.dark .navbar{
+
+    background:#243046;
+
+    border-radius:20px;
+
+}
+
+/* ==========================
+   TARJETAS
+========================== */
 
 body.dark .card,
+body.dark .panel,
 body.dark .grafica-panel,
+body.dark .config-card,
+body.dark .tabla-container,
 body.dark .tabla-productos,
 body.dark .tabla-reservas,
 body.dark .tabla-inversiones,
-body.dark .tabla-reportes,
-body.dark .config-card{
+body.dark .tabla-reportes{
 
-    background:#1e293b;
+    background:#243046;
+
     color:white;
+
     box-shadow:0 10px 25px rgba(0,0,0,.35);
 
 }
 
-/* Títulos */
+/* ==========================
+   TÍTULOS
+========================== */
 
 body.dark h1,
 body.dark h2,
 body.dark h3{
 
     color:white;
+
 }
 
-/* Texto */
+/* ==========================
+   TEXTO
+========================== */
 
 body.dark p,
 body.dark span,
 body.dark label,
-body.dark td{
+body.dark td,
+body.dark th{
 
     color:#e2e8f0;
+
 }
 
-/* Inputs */
+/* ==========================
+   FORMULARIOS
+========================== */
 
 body.dark input,
 body.dark select,
 body.dark textarea{
 
     background:#334155;
-    color:white;
-    border:1px solid #475569;
-}
 
-/* Placeholder */
+    color:white;
+
+    border:1px solid #475569;
+
+}
 
 body.dark input::placeholder{
 
     color:#cbd5e1;
+
 }
 
-/* Tablas */
+body.dark .formulario input,
+body.dark .formulario select{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid #475569;
+
+}
+
+body.dark .formulario button{
+
+    background:#4f46e5;
+
+    color:white;
+
+}
+
+/* ==========================
+   BUSCADOR
+========================== */
+
+body.dark #busqueda,
+body.dark #filtro-categoria{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid #475569;
+
+    box-shadow:none;
+
+}
+
+body.dark #busqueda::placeholder{
+
+    color:#cbd5e1;
+
+}
+
+/* ==========================
+   TABLAS
+========================== */
 
 body.dark table{
 
-    background:#1e293b;
+    background:#243046;
+
+}
+
+body.dark thead{
+
+    background:#4f46e5;
+
 }
 
 body.dark th{
 
-    background:#4f46e5;
     color:white;
+
 }
 
-body.dark tr{
+body.dark tbody{
+
+    background:#243046;
+
+}
+
+body.dark tbody tr{
 
     border-color:#334155;
+
 }
 
-/* Botones */
+body.dark tbody tr:hover{
+
+    background:#334155;
+
+}
+
+body.dark td{
+
+    color:#e2e8f0;
+
+}
+
+/* ==========================
+   BOTONES
+========================== */
 
 body.dark button{
 
     transition:.25s;
+
 }
 
 body.dark button:hover{
@@ -116,16 +233,133 @@ body.dark button:hover{
 
 }
 
-/* Cards Dashboard */
+/* ==========================
+   MODAL
+========================== */
+
+body.dark .modal-content{
+
+    background:#243046;
+
+    color:white;
+
+}
+
+body.dark .modal-content input{
+
+    background:#334155;
+
+    color:white;
+
+    border:1px solid #475569;
+
+}
+
+/* ==========================
+   DASHBOARD
+========================== */
 
 body.dark .dashboard .card{
 
-    background:#1e293b;
+    background:#243046;
+
 }
 
-/* Header */
+body.dark .panel{
+
+    background:#243046;
+
+}
+
+body.dark .paneles{
+
+    background:transparent;
+
+}
+
+body.dark .estado-stock-container{
+
+    background:transparent;
+
+}
+
+body.dark .estado-resumen{
+
+    color:white;
+
+}
+
+body.dark .estado-item{
+
+    color:white;
+
+}
+
+body.dark .estado-item span{
+
+    color:white;
+
+}
+
+/* ==========================
+   PRODUCTOS
+========================== */
+
+body.dark .tabla-header h3{
+
+    color:white;
+
+}
+
+body.dark .barra-herramientas{
+
+    background:transparent;
+
+}
+
+/* ==========================
+   REPORTES
+========================== */
+
+body.dark canvas{
+
+    filter:brightness(.95);
+
+}
+
+/* ==========================
+   HEADER
+========================== */
 
 body.dark header{
 
     color:white;
+
+}
+
+/* ==========================
+   TRANSICIONES
+========================== */
+
+body,
+.card,
+.panel,
+.config-card,
+.grafica-panel,
+.sidebar,
+.navbar,
+button,
+input,
+select,
+textarea,
+.contenido,
+table,
+.modal-content{
+
+    transition:
+        background .35s ease,
+        color .35s ease,
+        border-color .35s ease,
+        box-shadow .35s ease;
+
 }

@@ -16,9 +16,10 @@
 
 }
 
-.modal-content{
+body.dark .modal-content{
 
-    background:white;
+    color:white;
+    background:#243046;
 
     padding:30px;
 
@@ -31,7 +32,10 @@
     gap:15px;
 }
 
-.modal-content input{
+body.dark .modal-content input{
+
+    background:#334155;
+    color:white;
 
     padding:12px;
 
@@ -98,8 +102,8 @@
 
 }
 
-#busqueda,
-#filtro-categoria{
+body.dark #busqueda,
+body.dark #filtro-categoria{
 
     padding:14px 120px;
 
@@ -107,7 +111,10 @@
 
     border-radius:16px;
 
-    background:#f5f7fb;
+    background:#334155;
+    color:white;
+    border:1px solid #475569;
+    box-shadow:none;
 
     font-size:16px;
 
