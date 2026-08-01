@@ -16,60 +16,6 @@
 
 }
 
-body.dark .modal-content{
-
-    color:white;
-    background:#243046;
-
-    padding:30px;
-
-    border-radius:20px;
-
-    width:400px;
-
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
-
-body.dark .modal-content input{
-
-    background:#334155;
-    color:white;
-
-    padding:12px;
-
-    border:1px solid #ddd;
-
-    border-radius:10px;
-}
-
-.modal-content button{
-
-    background:#4f46e5;
-
-    color:white;
-
-    border:none;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-}
-
-.sidebar a{
-    text-decoration:none;
-    color:inherit;
-    display:block;
-    width:100%;
-}
-
-.sidebar li{
-    cursor:pointer;
-}
-
 .barra-herramientas{
     display:flex;
     gap:15px;

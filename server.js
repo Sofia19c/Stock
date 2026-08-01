@@ -559,16 +559,9 @@ app.delete(
 
 app.put("/productos/:id", async (req, res) => {
 
-    console.log("🔥 ENTRE AL PUT 🔥");
-
     try {
 
-        console.log("ID:", req.params.id);
-        console.log("BODY:", req.body);
-
         const producto = await Producto.findById(req.params.id);
-
-        console.log("Producto encontrado:", producto);
 
         if (!producto) {
             return res.status(404).json({
@@ -576,17 +569,11 @@ app.put("/productos/:id", async (req, res) => {
             });
         }
 
-        producto.nombre = req.body.nombre;
-        producto.categoria = req.body.categoria;
-        producto.cantidad = req.body.cantidad;
-        producto.precio = req.body.precio;
-        producto.venta = req.body.venta;
+        producto.cantidad += req.body.cambio;
 
         await producto.save();
 
-        res.json({
-            mensaje: "Producto actualizado"
-        });
+        res.json(producto);
 
     } catch (error) {
 
