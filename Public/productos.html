@@ -109,69 +109,69 @@
                 </div>
             </section>
 
-            <div class="tabla-header">
+            <section>
+                <div class="panel_productos">
+                    <input
+                        type="text"
+                        id="busqueda"
+                        placeholder="🔍 Buscar producto..."
+                        >
+                    <select id="filtro-categoria">
 
-                <h3> 📦 Productos </h3>
-                
-            </div>
+                        <option value="">
+                            📦 Todas las categorías
+                        </option>
+                        <option value="CarPlay">
+                            🚗 CarPlay
+                        </option>
+                        <option value="Cojines">
+                            🪑 Cojines
+                        </option>
+                        <option value="Intercomunicadores">
+                            🎧 Intercomunicadores
+                        </option>
+                        <option value="Otros">
+                            📦 Otros
+                        </option>
+                    </select>
+                </div>
+            </section>
 
-            <div class="barra-herramientas">
-                <input
-                    type="text"
-                    id="busqueda"
-                    placeholder="🔍 Buscar producto..."
-                >
+            <section>
+                <div class="contenedor-tabla">
+                    <div class="barra-herramientas">
 
-                <select id="filtro-categoria">
+                    </div>
+                    <table>
 
-                    <option value="">
-                        📦 Todas las categorías
-                    </option>
-                    <option value="CarPlay">
-                        🚗 CarPlay
-                    </option>
-                    <option value="Cojines">
-                        🪑 Cojines
-                    </option>
-                    <option value="Intercomunicadores">
-                        🎧 Intercomunicadores
-                    </option>
-                    <option value="Otros">
-                        📦 Otros
-                    </option>
-                </select>
-            </div>
+                        <thead>
 
-                <table>
+                            <tr>
 
-                    <thead>
+                                <th>Producto</th>
 
-                        <tr>
+                                <th>Categoría</th>
 
-                            <th>Producto</th>
+                                <th>cantidad</th>
 
-                            <th>Categoría</th>
+                                <th>Compra</th>
 
-                            <th>cantidad</th>
+                                <th>Venta</th>
 
-                            <th>Compra</th>
+                                <th>Estado</th> 
 
-                            <th>Venta</th>
+                                <th>Acciones</th>
 
-                            <th>Estado</th> 
+                            </tr>
 
-                            <th>Acciones</th>
+                        </thead>
 
-                        </tr>
+                        <tbody id="tabla-productos">
 
-                    </thead>
+                        </tbody>
 
-                    <tbody id="tabla-productos">
-
-                    </tbody>
-
-                </table>
-
+                    </table>
+                </div>
             </section>
         </main>
 

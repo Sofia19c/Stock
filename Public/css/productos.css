@@ -86,3 +86,43 @@ body.dark #filtro-categoria{
     font-size:16px;
 
 }
+
+.contenedor-tabla{
+    background: white;
+    border-radius: 24px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+}
+
+.tabla-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.tabla-header h3{
+    margin: 0;
+    font-size: 28px;
+    color: #1f2937;
+}
+
+.barra-herramientas{
+    display: flex;
+    gap: 15px;
+    margin: 0;   /* elimina el margen que tenía antes */
+}
+
+.panel_productos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 10px 0;
+    background:var(--surface);
+    border-radius:24px;
+    box-shadow:var(--shadow);
+}
