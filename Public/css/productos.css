@@ -108,12 +108,6 @@ body.dark #filtro-categoria{
     color: #1f2937;
 }
 
-.barra-herramientas{
-    display: flex;
-    gap: 15px;
-    margin: 0;   /* elimina el margen que tenía antes */
-}
-
 .panel_productos{
     display: flex;
     justify-content: center;

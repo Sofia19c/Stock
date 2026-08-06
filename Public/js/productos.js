@@ -58,12 +58,12 @@ async function guardarProducto(){
             "categoria"
         ).value;
 
-    const cantidad =
-        Number(
-            document.getElementById(
-                "cantidad"
-            ).value
-        );
+    const cantidadValor =
+        document.getElementById("cantidad").value;
+
+    const cantidad = cantidadValor === ""
+        ? 0
+        : Number(cantidadValor);
 
     const compra =
         Number(
@@ -105,6 +105,16 @@ async function guardarProducto(){
     console.log("productoEditando:", productoEditando);
     console.log("URL:", url);
 
+    console.log(
+        "Datos enviados:",
+        JSON.stringify({
+            nombre,
+            categoria,
+            cantidad,
+            compra,
+            venta
+        })
+    );
    // Enviar datos al servidor
 const respuesta = await fetch(
     "http://localhost:3000" + url,
@@ -155,9 +165,12 @@ if(respuesta.ok){
         "Guardar";
     document.getElementById("nombre").value = "";
     document.getElementById("categoria").value = "";
-    document.getElementById("cantidad").value = "";
-    document.getElementById("compra").value = "";
-    document.getElementById("venta").value = "";
+    document.getElementById("cantidad").value = 
+        producto.cantidad ?? 0;
+    document.getElementById("compra").value = 
+        producto.precio ?? 0;
+    document.getElementById("venta").value = 
+        producto.venta ?? 0;
 
     cargarProductos(); 
 }
@@ -362,6 +375,10 @@ async function  editarProducto(id) {
         productos.find(
             p => p._id === id
         );
+    console.log(
+        "PRODUCTO ENCONTRADO:",
+        JSON.stringify(producto)
+    );
 
     if(!producto){
         return;

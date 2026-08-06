@@ -20,6 +20,7 @@ const fs = require("fs");
 //Ayuda a trabajar con rutas de archivos y carpetas.
 const path = require ("path");
 const { json } = require("stream/consumers");
+const producto = require("./models/producto");
 //Crea una aplicación de Express.
 //app será el objeto principal para configurar rutas, middleware y el servidor.
 const app = express();
@@ -55,228 +56,150 @@ app.get("/", (req, res) => {
 //Aqui esta escuchando la peticion POST en la direccion /producto
 //req contiene todo lo que viene de afuera
 //res es lo que el servidor usara para contestarle al navegador
-// =======================================
-// PRODUCTOS
-// =======================================
- 
-app.post("/productos", async (req, res) => {
-
-    try {
-
-        const producto = new Producto({
-
-            nombre: req.body.nombre,
-
-            categoria: req.body.categoria,
-
-            cantidad: Number(req.body.cantidad),
-
-            precio: Number(req.body.precio),
-
-            venta: Number(req.body.venta)
-
+app.post("/productos", async (req, res) =>{
+    try{
+        const nuevoProducto = 
+        new Producto({
+            nombre:
+                req.body.nombre, 
+            
+            categoria:
+                req.body.categoria,
+            
+            cantidad:
+                Number(
+                    req.body.cantidad
+                ),
+            precio:
+                Number(
+                    req.body.precio
+                )
         });
 
-        await producto.save();
+        await nuevoProducto.save();
 
-        res.status(201).json({
-
-            ok: true,
-
-            mensaje: "Producto creado",
-
-            producto
-
+        res.json({
+            mensaje:
+            "Producto guardado correctamente "
         });
-
-    } catch (error) {
-
+    } catch (error){
         console.log(error);
 
         res.status(500).json({
-
-            ok: false,
-
-            mensaje: "Error creando producto"
-
+            mensaje:
+            "Error guardando producto"
         });
-
     }
-
 });
 
 //escucha las peticiones de tipo GEST en la direccion /productos
 //Aqui busca los productos directamente en MongoDB
 app.get("/productos", async (req, res) => {
-
-    try {
-
+    
+    try{
         const productos = await Producto.find();
 
         res.json(productos);
 
-    }
+    }catch (error) {
 
-    catch(error){
-
-        console.log(error);
+         console.log(
+            "ERROR PRODUCTOS:",
+            error
+        );
 
         res.status(500).json({
-
-            ok:false,
-
-            mensaje:"Error obteniendo productos"
-
+            mensaje:
+            "Error leyendo productos"
         });
-
     }
-
+    
 });
 
-app.put("/productos/:id", async (req, res) => {
+//El método HTTP PUT se usa por convención cuando queremos actualizar o modificar datos que ya existen.
+(
+    "/productos/:id",
+    async (req, res) => {
 
     try {
 
-        const producto = await Producto.findById(req.params.id);
+        const id =
+            req.params.id;
 
-        if(!producto){
+        const cambio =
+            req.bapp.putody.cambio;
+
+        const producto =
+            await Producto.findById(id);
+
+        if (!producto) {
 
             return res.status(404).json({
-
-                ok:false,
-
-                mensaje:"Producto no encontrado"
-
+                mensaje:
+                "Producto no encontrado"
             });
-
         }
 
-        producto.nombre = req.body.nombre;
+        const nuevaCantidad =
+            producto.cantidad + cambio;
 
-        producto.categoria = req.body.categoria;
+        if (
+            nuevaCantidad < 0
+        ) {
 
-        producto.cantidad = Number(req.body.cantidad);
+            return res.status(400).json({
+                mensaje:
+                "La cantidad no puede ser menor a 0"
+            });
+        }
 
-        producto.precio = Number(req.body.precio);
-
-        producto.venta = Number(req.body.venta);
+        producto.cantidad =
+            nuevaCantidad;
 
         await producto.save();
 
         res.json({
-
-            ok:true,
-
-            mensaje:"Producto actualizado",
-
-            producto
-
+            mensaje:
+            "Cantidad actualizada"
         });
 
-    }
-
-    catch(error){
-
-        console.log(error);
+    } catch (error) {
 
         res.status(500).json({
-
-            ok:false,
-
-            mensaje:"Error actualizando producto"
-
+            mensaje:
+            "Error actualizando producto"
         });
-
     }
-
 });
 
-app.patch("/productos/:id/stock", async (req,res)=>{
+app.delete("/productos/:id", async (req, res) =>{
 
     try{
+        const id = 
+            req.params.id;
 
-        const producto = await Producto.findById(req.params.id);
-
+        const producto =
+            await Producto.findByIdAndDelete(id);
+        
         if(!producto){
-
-            return res.status(404).json({
-
-                mensaje:"Producto no encontrado"
-
+            return res.status(400).json({
+                mensaje:
+                "Producto no encontrado"
             });
-
-        }
-
-        producto.cantidad += Number(req.body.cambio);
-
-        if(producto.cantidad < 0){
-
-            producto.cantidad = 0;
-
-        }
-
-        await producto.save();
-
-        res.json({
-
-            mensaje:"Stock actualizado"
-
-        });
-
-    }
-
-    catch(error){
-
-        console.log(error);
-
-        res.status(500).json({
-
-            mensaje:"Error"
-
-        });
-
-    }
-
-});
-
-app.delete("/productos/:id", async (req,res)=>{
-
-    try{
-
-        const producto = await Producto.findByIdAndDelete(req.params.id);
-
-        if(!producto){
-
-            return res.status(404).json({
-
-                mensaje:"Producto no encontrado"
-
-            });
-
         }
 
         res.json({
-
-            mensaje:"Producto eliminado"
-
+            mensaje:
+            "Producto eliminado"
         });
 
-    }
-
-    catch(error){
-
-        console.log(error);
-
+    }catch (error){
         res.status(500).json({
-
-            mensaje:"Error eliminando"
-
+            mensaje:
+            "Error eliminando producto"
         });
-
     }
-
 });
-
 
 app.get("/exportar-excel", async (req, res) => {
 
