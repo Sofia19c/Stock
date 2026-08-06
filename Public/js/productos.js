@@ -165,12 +165,9 @@ if(respuesta.ok){
         "Guardar";
     document.getElementById("nombre").value = "";
     document.getElementById("categoria").value = "";
-    document.getElementById("cantidad").value = 
-        producto.cantidad ?? 0;
-    document.getElementById("compra").value = 
-        producto.precio ?? 0;
-    document.getElementById("venta").value = 
-        producto.venta ?? 0;
+    document.getElementById("cantidad").value = "";
+    document.getElementById("compra").value = "";
+    document.getElementById("venta").value = "";
 
     cargarProductos(); 
 }
