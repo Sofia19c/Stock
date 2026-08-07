@@ -382,7 +382,6 @@ async function cargarProductos() {
 
 //Recibe dos parámetros: el id del producto a modificar y el cambio (que será 1 o -1).
     async function editarCantidad(id, cambio) {
-       
         //productos/${id}`: Usando comillas invertidas, le insertamos el ID directamente a la URL.
         //Si toque el producto 12, la petición se enviará a /productos/12`
         await fetch(`/productos/${id}`, {

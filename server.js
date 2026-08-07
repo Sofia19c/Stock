@@ -60,21 +60,19 @@ app.get("/", (req, res) => {
 // =======================================
  
 app.post("/productos", async (req, res) => {
+    console.log("BODY:");
+    console.log(req.body);
+
 
     try {
 
         const producto = new Producto({
 
             nombre: req.body.nombre,
-
             categoria: req.body.categoria,
-
             cantidad: Number(req.body.cantidad),
-
             precio: Number(req.body.precio),
-
-            venta: Number(req.body.venta)
-
+            venta: req.body.venta ? Number(req.body.venta) : 0
         });
 
         await producto.save();
@@ -135,56 +133,50 @@ app.get("/productos", async (req, res) => {
 
 app.put("/productos/:id", async (req, res) => {
 
-    try {
+    try{
 
         const producto = await Producto.findById(req.params.id);
 
         if(!producto){
-
             return res.status(404).json({
-
-                ok:false,
-
-                mensaje:"Producto no encontrado"
-
+                ok:false
             });
-
         }
 
-        producto.nombre = req.body.nombre;
+        if(req.body.cambio !== undefined){
 
-        producto.categoria = req.body.categoria;
+            producto.cantidad += Number(req.body.cambio);
 
-        producto.cantidad = Number(req.body.cantidad);
+            if(producto.cantidad < 0){
+                producto.cantidad = 0;
+            }
 
-        producto.precio = Number(req.body.precio);
+        }else{
 
-        producto.venta = Number(req.body.venta);
+            producto.nombre = req.body.nombre;
+            producto.categoria = req.body.categoria;
+            producto.cantidad = Number(req.body.cantidad);
+            producto.precio = Number(req.body.precio);
+
+            if(req.body.venta !== undefined){
+                producto.venta = Number(req.body.venta);
+            }
+
+        }
 
         await producto.save();
 
         res.json({
-
             ok:true,
-
-            mensaje:"Producto actualizado",
-
             producto
-
         });
 
-    }
+    }catch(err){
 
-    catch(error){
-
-        console.log(error);
+        console.log(err);
 
         res.status(500).json({
-
-            ok:false,
-
-            mensaje:"Error actualizando producto"
-
+            ok:false
         });
 
     }
