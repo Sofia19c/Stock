@@ -671,11 +671,12 @@ app.get("/reportes/inventario", async(req,res) =>{
             }
         ];
 
-        productos.forEach(productos =>{
+        productos.forEach(producto => {
             hoja.addRow({
                 nombre: producto.nombre,
                 categoria: producto.categoria,
                 cantidad: producto.cantidad,
+                precio: producto.precio,
                 venta: producto.venta
             });
         });
@@ -688,7 +689,7 @@ app.get("/reportes/inventario", async(req,res) =>{
         );
 
         res.setHeader(
-            "content-Disposiion",
+            "content-Disposition",
             `attachment; filename= "${archivo}"`
         );
 
