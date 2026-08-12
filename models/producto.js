@@ -28,6 +28,16 @@ new mongoose.Schema({
     venta:{
         type:Number,
         default:0
+    },
+
+    tipoInversion: {
+        type: String,
+        default: ""
+    },
+
+    productosVendidos: {
+        type: Number,
+        default: 0
     }
 });
 

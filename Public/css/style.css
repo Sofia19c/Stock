@@ -368,6 +368,9 @@ button:hover{
 /* =========================
    TABLA
 ========================= */
+/* =========================
+   TABLA
+========================= */
 
 .tabla-container{
 
@@ -375,17 +378,30 @@ button:hover{
 
     border-radius:24px;
 
-    overflow:hidden;
+    overflow-x:auto;
+    overflow-y:hidden;
 
     box-shadow:
         0 10px 30px
         rgba(0,0,0,.06);
 }
 
+/* Tabla principal */
+
 table{
+
     width:100%;
+
+    min-width:1100px;
+
     border-collapse:collapse;
+
+    table-layout:fixed;
 }
+
+/* =========================
+   ENCABEZADO
+========================= */
 
 th{
 
@@ -393,22 +409,179 @@ th{
 
     color:white;
 
-    padding:18px;
+    padding:18px 10px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    white-space:nowrap;
 }
+
+/* =========================
+   CELDAS
+========================= */
 
 td{
 
-    padding:18px;
+    padding:18px 10px;
 
     text-align:center;
 
     border-bottom:
-        1px solid  var(--border);
+        1px solid var(--border);
+
+    font-size:14px;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
 }
+
+/* =========================
+   ANCHO DE CADA COLUMNA
+========================= */
+
+/* Producto */
+th:nth-child(1),
+td:nth-child(1){
+    width:14%;
+}
+
+/* Categoría */
+th:nth-child(2),
+td:nth-child(2){
+    width:13%;
+}
+
+/* Cantidad */
+th:nth-child(3),
+td:nth-child(3){
+    width:9%;
+}
+
+/* Precio unitario */
+th:nth-child(4),
+td:nth-child(4){
+    width:12%;
+}
+
+/* Precio total */
+th:nth-child(5),
+td:nth-child(5){
+    width:12%;
+}
+
+/* Tipo de inversión */
+th:nth-child(6),
+td:nth-child(6){
+    width:13%;
+}
+
+/* Productos vendidos */
+th:nth-child(7),
+td:nth-child(7){
+    width:11%;
+}
+
+/* Estado */
+th:nth-child(8),
+td:nth-child(8){
+    width:9%;
+}
+
+/* Acciones */
+th:nth-child(9),
+td:nth-child(9){
+    width:14%;
+}
+
+/* =========================
+   HOVER
+========================= */
 
 tr:hover{
     background:#f8fafc;
 }
+
+/* =========================
+   INPUTS DENTRO DE LA TABLA
+========================= */
+
+td input{
+
+    width:100%;
+
+    max-width:150px;
+
+    padding:10px;
+
+    border:1px solid var(--border);
+
+    border-radius:10px;
+
+    background:var(--surface-hover);
+
+    text-align:center;
+
+    font-size:14px;
+}
+
+td input:focus{
+
+    outline:none;
+
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(79,70,229,.12);
+}
+
+/* =========================
+   BOTONES DE ACCIONES
+========================= */
+
+td button{
+
+    padding:9px 12px;
+
+    margin:2px;
+
+    border-radius:10px;
+
+    font-size:13px;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.stock-ok{
+
+    color:var(--success);
+
+    font-weight:700;
+}
+
+.stock-bajo{
+
+    color:var(--warning);
+
+    font-weight:700;
+}
+
+.stock-sin{
+
+    color:var(--danger);
+
+    font-weight:600;
+}
+
 
 /* =========================
    ESTADOS

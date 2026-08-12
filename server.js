@@ -72,7 +72,10 @@ app.post("/productos", async (req, res) => {
             categoria: req.body.categoria,
             cantidad: Number(req.body.cantidad),
             precio: Number(req.body.precio),
-            venta: req.body.venta ? Number(req.body.venta) : 0
+            venta: req.body.venta ? Number(req.body.venta) : 0,
+
+            tipoInversion: req.body.tipoInversion || "",
+            productosVendidos: Number(req.body.productosVendidos) || 0
         });
 
         await producto.save();
@@ -133,33 +136,69 @@ app.get("/productos", async (req, res) => {
 
 app.put("/productos/:id", async (req, res) => {
 
-    try{
+    try {
 
         const producto = await Producto.findById(req.params.id);
 
-        if(!producto){
+        if (!producto) {
+
             return res.status(404).json({
-                ok:false
+                ok: false,
+                mensaje: "Producto no encontrado"
             });
+
         }
 
-        if(req.body.cambio !== undefined){
+        // =========================
+        // CAMBIAR CANTIDAD + / -
+        // =========================
 
-            producto.cantidad += Number(req.body.cambio);
+        if (req.body.cambio !== undefined) {
 
-            if(producto.cantidad < 0){
+            producto.cantidad =
+                Number(producto.cantidad) +
+                Number(req.body.cambio);
+
+            // Evitar cantidades negativas
+            if (producto.cantidad < 0) {
                 producto.cantidad = 0;
             }
 
-        }else{
+        }
 
-            producto.nombre = req.body.nombre;
-            producto.categoria = req.body.categoria;
-            producto.cantidad = Number(req.body.cantidad);
-            producto.precio = Number(req.body.precio);
+        // =========================
+        // EDITAR PRODUCTO COMPLETO
+        // =========================
 
-            if(req.body.venta !== undefined){
+        else {
+
+            if (req.body.nombre !== undefined) {
+                producto.nombre = req.body.nombre;
+            }
+
+            if (req.body.categoria !== undefined) {
+                producto.categoria = req.body.categoria;
+            }
+
+            if (req.body.cantidad !== undefined) {
+                producto.cantidad = Number(req.body.cantidad);
+            }
+
+            if (req.body.precio !== undefined) {
+                producto.precio = Number(req.body.precio);
+            }
+
+            if (req.body.venta !== undefined) {
                 producto.venta = Number(req.body.venta);
+            }
+
+            if (req.body.tipoInversion !== undefined) {
+                producto.tipoInversion = req.body.tipoInversion;
+            }
+
+            if (req.body.productosVendidos !== undefined) {
+                producto.productosVendidos =
+                    Number(req.body.productosVendidos);
             }
 
         }
@@ -167,16 +206,20 @@ app.put("/productos/:id", async (req, res) => {
         await producto.save();
 
         res.json({
-            ok:true,
+            ok: true,
+            mensaje: "Producto actualizado",
             producto
         });
 
-    }catch(err){
+    }
 
-        console.log(err);
+    catch (error) {
+
+        console.log(error);
 
         res.status(500).json({
-            ok:false
+            ok: false,
+            mensaje: "Error actualizando producto"
         });
 
     }

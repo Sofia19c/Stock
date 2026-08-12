@@ -11,6 +11,8 @@ boton.addEventListener("click", async () => {
     const categoria =document.getElementById("categoria").value;
     const cantidad = document.getElementById("cantidad").value;
     const precio = document.getElementById("precio").value;
+    const tipoInversion = document.getElementById("tipoInversion").value;
+    const productosVendidos = document.getElementById("productosVendidos").value;
 
     //Aqui no permite que se guarden valores vacios, se deben completar las 3 celdas
     if(!nombre || !cantidad ||! precio){
@@ -22,7 +24,9 @@ boton.addEventListener("click", async () => {
         nombre,
         categoria,
         cantidad,
-        precio
+        precio,
+        tipoInversion,
+        productosVendidos
     };
 
     //fetch es la herramienta nativa de JavaScript para hacer peticiones por internet. 
@@ -253,6 +257,25 @@ async function cargarProductos() {
                 <td>${producto.cantidad}</td>
                 <td>$${Number(producto.precio).toLocaleString()}</td>
                 <td>$${precioTotal.toLocaleString()}</td>
+                
+                <td>
+                    <input
+                        type ="text"
+                        value="${producto.tipoInversion || ""}"
+                        onchange="actualizarProducto('${producto._id}', 'tipoInversion', this.value)"
+                        placeholder="Tipo de inversión"
+                    >
+                </td>
+
+                <td>
+                    <input
+                        type="number"
+                        min="0"
+                        value="${producto.productosVendidos || 0}"
+                        onchange="actualizarProducto('${producto._id}', 'productosVendidos', this.value)"
+                    >
+                </td>
+
                <td class="${
                     Number(producto.cantidad) === 0
                     ? "stock-sin"
@@ -438,4 +461,34 @@ botonExcel.addEventListener(
     }
 );
 
+async function actualizarProducto (id, campo, valor) {
+    try{
+        const producto ={
+            [campo]: campo === "productosVendidos"
+                ? Number(valor)
+                : valor
+        };
+
+        const respuesta = await fetch(`/productos/${id}`, {
+            method: "PUT",
+
+            headers:{
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(producto)
+        });
+
+        const data = await respuesta.json();
+
+        if(!data.ok) {
+            alert(data.mensaje);
+            return;
+        }
+
+        console.log("Producto actualizado");
+    } catch (error){
+        console.error("Error actualizando producto:", error);
+    }
+}
 
