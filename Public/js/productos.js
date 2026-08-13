@@ -181,6 +181,16 @@ async function cargarProductos() {
     const productos =
         await respuesta.json();
 
+    const totalVentas = productos.reduce(
+        (total, producto) => 
+            total +
+            (
+                Number(producto.productosVendidos || 0) *
+                Number(producto.venta || 0)
+            ),
+        0
+    );
+
     const totalProductos =
     productos.length;
 
@@ -243,6 +253,10 @@ async function cargarProductos() {
                 producto.nombre
                     .toLowerCase()
                     .includes(textoBusqueda);
+            
+            const totalVenta =
+                Number(producto.venta || 0) *
+                Number(producto.productosVendidos || 0);
 
             const coincideCategoria =
                 categoriaSeleccionada === "" || 
@@ -292,19 +306,34 @@ async function cargarProductos() {
 
                 <td>
                     $${Number(
-                        producto.precio
+                        producto.precio || 0
+                    ).toLocaleString()}
+                </td>
+
+                <td>
+                    $${(
+                        Number(producto.venta || 0) *
+                        Number(producto.productosVendidos || 0)
                     ).toLocaleString()}
                 </td>
 
                 <td>
                     $${Number(
-                        producto.venta
-                    ).toLocaleString()}
+                        producto.productosVendidos || 0
+                    )}
                 </td>
 
                 <td>
                     ${estado}
                 </td>
+
+                <td class="${
+                    Number(producto.cantidad) === 0
+                    ? "stock-sin"
+                    : Number(producto.cantidad) < 5
+                        ? "stock-bajo"
+                        : "stock-ok"
+                }">
 
                 <td>
                     <button onclick="editarProducto('${producto._id}')">

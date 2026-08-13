@@ -1,122 +1,137 @@
-.btn-nuevo{
 
-    background:#4f46e5;
+/* =========================
+   CONTENEDOR DE TABLA
+========================= */
 
-    color:white;
+.contenedor-tabla{
 
-    border:none;
+    width:100%;
 
-    padding:12px 22px;
+    background:var(--surface);
 
-    border-radius:12px;
+    border-radius:24px;
 
-    cursor:pointer;
+    padding:0;
 
-    font-weight:600;
+    margin-top:25px;
 
+    overflow-x:auto;
+    overflow-y:hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.06);
+
+    box-sizing:border-box;
 }
 
-.barra-herramientas{
-    display:flex;
-    gap:15px;
-    justify-content: flex-end;
-    align-items: center;
-    margin: 20px 0;
-}
 
-.tabla-header{
+/* =========================
+   TABLA PRINCIPAL
+========================= */
 
-    display:flex;
+.contenedor-tabla table{
 
-    justify-content:space-between;
+    width:100%;
 
-    align-items:center;
+    min-width:0;
 
-    margin-bottom:20px;
+    border-collapse:collapse;
 
-    padding:0 10px;
-
-}
-
-.tabla-header h3{
+    table-layout:auto;
 
     margin:0;
 
-    color:#1f2937;
-
-    font-size:24px;
-
 }
 
-body.dark #busqueda,
-body.dark #filtro-categoria{
 
-    padding:14px 120px;
+/* =========================
+   ENCABEZADO
+========================= */
 
-    border:none;
+.contenedor-tabla th{
 
-    border-radius:16px;
+    background:var(--primary);
 
-    background:#334155;
     color:white;
-    border:1px solid #475569;
-    box-shadow:none;
 
-    font-size:16px;
+    padding:18px 10px;
 
-    outline:none;
+    text-align:center;
 
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    font-size:14px;
 
-}
+    font-weight:700;
 
-#busqueda{
-    width:420px;
-
-    height:48px;
-
-    font-size:16px;
-}
-
-#filtro-categoria{
-    width:420px;
-
-    height:48px;
-
-    font-size:16px;
+    white-space:nowrap;
 
 }
 
-.contenedor-tabla{
-    background: white;
-    border-radius: 24px;
-    padding: 25px;
-    margin-top: 25px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+
+/* =========================
+   CELDAS
+========================= */
+
+.contenedor-tabla td{
+
+    padding:15px 10px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#374151;
+
+    border-bottom:1px solid #e5e7eb;
+
 }
 
-.tabla-header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+
+/* =========================
+   FILAS
+========================= */
+
+.contenedor-tabla tbody tr{
+
+    transition:.2s ease;
+
 }
 
-.tabla-header h3{
-    margin: 0;
-    font-size: 28px;
-    color: #1f2937;
+.contenedor-tabla tbody tr:hover{
+
+    background:#f8fafc;
+
 }
 
-.panel_productos{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 10px 0;
-    background:var(--surface);
-    border-radius:24px;
-    box-shadow:var(--shadow);
+
+/* =========================
+   ACCIONES
+========================= */
+
+.contenedor-tabla th:last-child,
+.contenedor-tabla td:last-child{
+
+    width:120px;
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================
+   MODO OSCURO
+========================= */
+
+body.dark .contenedor-tabla td{
+
+    color:#e2e8f0;
+
+    border-bottom:1px solid #334155;
+
+}
+
+body.dark .contenedor-tabla tbody tr:hover{
+
+    background:#1e293b;
+
 }
