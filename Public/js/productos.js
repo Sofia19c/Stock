@@ -292,6 +292,7 @@ async function cargarProductos() {
             tabla.innerHTML += `
 
             <tr>
+
                 <td>
                     ${producto.nombre}
                 </td>
@@ -311,40 +312,49 @@ async function cargarProductos() {
                 </td>
 
                 <td>
-                    $${(
-                        Number(producto.venta || 0) *
-                        Number(producto.productosVendidos || 0)
+                    $${Number(
+                        producto.venta || 0
                     ).toLocaleString()}
                 </td>
 
                 <td>
-                    $${Number(
+                    ${Number(
                         producto.productosVendidos || 0
                     )}
                 </td>
 
-                <td>
+                <td class="${
+                    Number(producto.cantidad) === 0
+                        ? "stock-sin"
+                        : Number(producto.cantidad) < 5
+                            ? "stock-bajo"
+                            : "stock-ok"
+                }">
                     ${estado}
                 </td>
 
-                <td class="${
-                    Number(producto.cantidad) === 0
-                    ? "stock-sin"
-                    : Number(producto.cantidad) < 5
-                        ? "stock-bajo"
-                        : "stock-ok"
-                }">
+                <td class="acciones">
 
-                <td>
-                    <button onclick="editarProducto('${producto._id}')">
+                    <button
+                        type="button"
+                        onclick="editarProducto('${producto._id}')"
+                        title="Editar producto"
+                    >
                         ✏️
                     </button>
 
-                    <button onclick="eliminarProducto('${producto._id}')">
+                    <button
+                        type="button"
+                        onclick="eliminarProducto('${producto._id}')"
+                        title="Eliminar producto"
+                    >
                         🗑️
                     </button>
+
                 </td>
+
             </tr>
+
             `;
         }
     );
